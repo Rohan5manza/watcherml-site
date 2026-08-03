@@ -11,6 +11,333 @@
   <title>WatcherML — Proactive ML Experiment Forensics</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* Hero PyPI / SDK launcher — self-contained additions */
+    .hero-launcher {
+      position: relative;
+      margin: 1.65rem 0 1.35rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 86% 14%, rgba(140, 255, 176, .14), transparent 34%),
+        linear-gradient(145deg, rgba(18, 22, 31, .96), rgba(9, 11, 16, .96));
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .04);
+      isolation: isolate;
+    }
+
+    .hero-launcher::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: .18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 26px 26px;
+      mask-image: linear-gradient(to right, transparent, #000 32%, #000 100%);
+    }
+
+    .launcher-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .72rem .78rem .58rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .launcher-badge,
+    .launcher-controls,
+    .launcher-dots,
+    .launcher-meta,
+    .launcher-command-cloud {
+      display: flex;
+      align-items: center;
+    }
+
+    .launcher-badge {
+      gap: .5rem;
+      color: rgba(255, 255, 255, .78);
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .launcher-badge-dot {
+      width: .48rem;
+      height: .48rem;
+      border-radius: 999px;
+      background: #8cffb0;
+      box-shadow: 0 0 0 4px rgba(140, 255, 176, .1), 0 0 18px rgba(140, 255, 176, .72);
+      animation: launcherPulse 2.2s ease-in-out infinite;
+    }
+
+    .launcher-controls { gap: .42rem; }
+
+    .launcher-counter {
+      min-width: 3.75rem;
+      color: rgba(255, 255, 255, .52);
+      font: 700 .68rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: .08em;
+      text-align: right;
+    }
+
+    .launcher-arrow,
+    .launcher-dot,
+    .launcher-copy {
+      appearance: none;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .launcher-arrow {
+      display: grid;
+      width: 1.95rem;
+      height: 1.95rem;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .045);
+      color: rgba(255, 255, 255, .76);
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    .launcher-arrow:hover,
+    .launcher-arrow:focus-visible {
+      border-color: rgba(140, 255, 176, .38);
+      background: rgba(140, 255, 176, .1);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .launcher-viewport {
+      overflow: hidden;
+      touch-action: pan-y;
+      outline: none;
+    }
+
+    .launcher-viewport:focus-visible {
+      box-shadow: inset 0 0 0 2px rgba(140, 255, 176, .36);
+    }
+
+    .launcher-track {
+      display: flex;
+      transition: transform .58s cubic-bezier(.22, .9, .3, 1);
+      will-change: transform;
+    }
+
+    .launcher-slide {
+      display: grid;
+      flex: 0 0 100%;
+      grid-template-columns: minmax(0, .88fr) minmax(15rem, 1.12fr);
+      align-items: center;
+      gap: 1rem;
+      min-height: 202px;
+      padding: 1.08rem;
+    }
+
+    .launcher-kicker {
+      display: block;
+      margin-bottom: .48rem;
+      color: #8cffb0;
+      font-size: .66rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .launcher-slide h3 {
+      margin: 0 0 .46rem;
+      color: #fff;
+      font-size: clamp(1.05rem, 2vw, 1.32rem);
+      line-height: 1.12;
+      letter-spacing: -.025em;
+    }
+
+    .launcher-slide p {
+      margin: 0;
+      max-width: 33rem;
+      color: rgba(255, 255, 255, .58);
+      font-size: .8rem;
+      line-height: 1.55;
+    }
+
+    .launcher-meta {
+      flex-wrap: wrap;
+      gap: .36rem;
+      margin-top: .72rem;
+    }
+
+    .launcher-meta span,
+    .launcher-command-cloud span {
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .035);
+      color: rgba(255, 255, 255, .61);
+      font: 600 .62rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .launcher-meta span { padding: .34rem .5rem; }
+
+    .launcher-terminal {
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 13px;
+      background: rgba(4, 6, 10, .86);
+      box-shadow: inset 0 1px rgba(255, 255, 255, .035), 0 12px 36px rgba(0, 0, 0, .2);
+    }
+
+    .launcher-terminal::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -30%;
+      width: 42%;
+      height: 200%;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(140,255,176,.06), transparent);
+      transform: rotate(16deg);
+      animation: launcherScan 5.5s linear infinite;
+    }
+
+    .launcher-terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: .34rem;
+      padding: .55rem .65rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .07);
+      color: rgba(255, 255, 255, .42);
+      font: 600 .61rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .launcher-terminal-bar i {
+      width: .42rem;
+      height: .42rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .launcher-terminal-bar span { margin-left: .22rem; }
+
+    .launcher-terminal pre {
+      overflow: auto;
+      margin: 0;
+      padding: .9rem 3.4rem .9rem .85rem;
+      color: #eaf6ef;
+      font: 500 .72rem/1.63 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      white-space: pre;
+      scrollbar-width: thin;
+    }
+
+    .launcher-terminal .cmd { color: #8cffb0; }
+    .launcher-terminal .flag { color: #a8b8ff; }
+    .launcher-terminal .comment { color: rgba(255,255,255,.38); }
+    .launcher-terminal .string { color: #ffd08a; }
+
+    .launcher-copy {
+      position: absolute;
+      right: .55rem;
+      bottom: .55rem;
+      z-index: 2;
+      padding: .4rem .52rem;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 8px;
+      background: rgba(15, 19, 27, .94);
+      color: rgba(255, 255, 255, .66);
+      font: 700 .58rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      transition: color .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .launcher-copy:hover,
+    .launcher-copy:focus-visible {
+      border-color: rgba(140,255,176,.35);
+      background: rgba(140,255,176,.1);
+      color: #b9ffcb;
+      outline: none;
+    }
+
+    .launcher-command-cloud {
+      flex-wrap: wrap;
+      gap: .32rem;
+      margin-top: .68rem;
+    }
+
+    .launcher-command-cloud span { padding: .3rem .44rem; }
+
+    .launcher-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .58rem .8rem .68rem 1rem;
+      border-top: 1px solid rgba(255, 255, 255, .065);
+    }
+
+    .launcher-hint {
+      color: rgba(255, 255, 255, .38);
+      font-size: .64rem;
+    }
+
+    .launcher-dots { gap: .42rem; }
+
+    .launcher-dot {
+      width: .42rem;
+      height: .42rem;
+      padding: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,.2);
+      transition: width .25s ease, background .25s ease;
+    }
+
+    .launcher-dot.is-active {
+      width: 1.35rem;
+      background: #8cffb0;
+    }
+
+    .hero-actions { position: relative; z-index: 1; }
+
+    @keyframes launcherPulse {
+      0%, 100% { opacity: .65; transform: scale(.92); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    @keyframes launcherScan {
+      from { transform: translateX(-10%) rotate(16deg); }
+      to { transform: translateX(360%) rotate(16deg); }
+    }
+
+    @media (max-width: 760px) {
+      .hero-launcher { margin-top: 1.3rem; }
+      .launcher-slide {
+        grid-template-columns: 1fr;
+        align-items: start;
+        min-height: 340px;
+        padding: 1rem;
+      }
+      .launcher-terminal pre { font-size: .67rem; }
+      .launcher-hint { display: none; }
+    }
+
+    @media (max-width: 430px) {
+      .launcher-counter { display: none; }
+      .launcher-slide { min-height: 360px; }
+      .launcher-footer { justify-content: center; }
+      .launcher-terminal pre { padding-right: .8rem; padding-bottom: 3.1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .launcher-track { transition: none; }
+      .launcher-badge-dot,
+      .launcher-terminal::after { animation: none; }
+    }
+  </style>
   <script defer src="script.js"></script>
 </head>
 <body>
@@ -40,7 +367,7 @@
 
       <div class="nav-actions">
         <a class="text-link desktop-only" href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="button button-small button-primary desktop-only" href="#early-access">Follow the build</a>
+        <a class="button button-small button-primary desktop-only" href="#install">Install now</a>
         <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-toggle>
           <span></span><span></span>
         </button>
@@ -52,6 +379,7 @@
       <a href="#workflow">How it works</a>
       <a href="#architecture">Architecture</a>
       <a href="#safety">Safety</a>
+      <a href="#install">Install</a>
       <a href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">GitHub</a>
     </div>
   </header>
@@ -68,6 +396,107 @@
           <p class="hero-lede">
             WatcherML is a proactive forensics debugger for ML experiments. It autonomously captures evidence, diagnoses failures, proposes bounded interventions, reruns controlled trials, and proves which change actually worked.
           </p>
+
+          <div class="hero-launcher" id="install" data-launcher aria-label="Install and use WatcherML">
+            <div class="launcher-head">
+              <div class="launcher-badge"><span class="launcher-badge-dot"></span>Official PyPI install</div>
+              <div class="launcher-controls">
+                <span class="launcher-counter" data-launcher-counter>01 / 04</span>
+                <button class="launcher-arrow" type="button" data-launcher-prev aria-label="Previous example">←</button>
+                <button class="launcher-arrow" type="button" data-launcher-next aria-label="Next example">→</button>
+              </div>
+            </div>
+
+            <div class="launcher-viewport" data-launcher-viewport tabindex="0" aria-roledescription="carousel">
+              <div class="launcher-track" data-launcher-track>
+                <article class="launcher-slide" aria-label="1 of 4: Core installation">
+                  <div>
+                    <span class="launcher-kicker">Core recorder</span>
+                    <h3>Install the full local foundation.</h3>
+                    <p>Get the SDK, CLI, failure capsules, and recovery agent—without the notebook extension or web UI.</p>
+                    <div class="launcher-meta"><span>local-first</span><span>SDK + CLI</span><span>no web UI</span></div>
+                  </div>
+                  <div class="launcher-terminal">
+                    <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>terminal</span></div>
+                    <pre><code><span class="cmd">pip install</span> watcherml</code></pre>
+                    <button class="launcher-copy" type="button" data-copy-text="pip install watcherml">Copy</button>
+                  </div>
+                </article>
+
+                <article class="launcher-slide" aria-label="2 of 4: Optional integrations">
+                  <div>
+                    <span class="launcher-kicker">Choose your surface</span>
+                    <h3>Add notebooks, the local UI, or both.</h3>
+                    <p>Keep the core lean, then install only the integrations that match how you work.</p>
+                    <div class="launcher-meta"><span>%load_ext watcherml</span><span>watcher ui</span><span>optional extras</span></div>
+                  </div>
+                  <div class="launcher-terminal">
+                    <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>extras</span></div>
+                    <pre><code><span class="comment"># Jupyter / IPython</span>
+<span class="cmd">pip install</span> watcherml[notebook]
+
+<span class="comment"># Local web UI</span>
+<span class="cmd">pip install</span> watcherml[ui]
+
+<span class="comment"># Everything</span>
+<span class="cmd">pip install</span> watcherml[notebook,ui]</code></pre>
+                    <button class="launcher-copy" type="button" data-copy-text="pip install watcherml[notebook,ui]">Copy all</button>
+                  </div>
+                </article>
+
+                <article class="launcher-slide" aria-label="3 of 4: Python SDK example">
+                  <div>
+                    <span class="launcher-kicker">Python SDK</span>
+                    <h3>Wrap the training loop. Preserve the evidence.</h3>
+                    <p>Record configuration and run context with a small API, then let WatcherML freeze forensic evidence when execution fails.</p>
+                    <div class="launcher-meta"><span>context manager</span><span>run metadata</span><span>failure capsule</span></div>
+                  </div>
+                  <div class="launcher-terminal">
+                    <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>train.py</span></div>
+                    <pre><code><span class="flag">import</span> watcherml <span class="flag">as</span> watcher
+
+<span class="flag">with</span> watcher.run(
+    project=<span class="string">"mistral-lora"</span>,
+    config=config,
+) <span class="flag">as</span> run:
+    train(model, dataset, run=run)</code></pre>
+                    <button class="launcher-copy" type="button" data-copy-text="import watcherml as watcher\n\nwith watcher.run(\n    project=\"mistral-lora\",\n    config=config,\n) as run:\n    train(model, dataset, run=run)">Copy</button>
+                  </div>
+                </article>
+
+                <article class="launcher-slide" aria-label="4 of 4: WatcherML CLI example">
+                  <div>
+                    <span class="launcher-kicker">Forensics from the terminal</span>
+                    <h3>Inspect, compare, explain, and export.</h3>
+                    <p>Move from a failed run to an auditable diagnosis without leaving your local development workflow.</p>
+                    <div class="launcher-command-cloud" aria-label="Available CLI commands">
+                      <span>init</span><span>runs</span><span>inspect</span><span>failures</span><span>compare</span><span>advise</span><span>export</span><span>recoveries</span><span>recovery</span><span>ui</span>
+                    </div>
+                  </div>
+                  <div class="launcher-terminal">
+                    <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>watcher CLI</span></div>
+                    <pre><code><span class="cmd">watcher</span> init
+<span class="cmd">watcher</span> runs <span class="flag">--project</span> mistral-lora
+<span class="cmd">watcher</span> inspect RUN_ID <span class="flag">--advise</span>
+<span class="cmd">watcher</span> compare RUN_A RUN_B <span class="flag">--advise</span>
+<span class="cmd">watcher</span> export RUN_ID <span class="flag">--format</span> capsule
+<span class="cmd">watcher</span> ui <span class="flag">--port</span> 7331</code></pre>
+                    <button class="launcher-copy" type="button" data-copy-text="watcher init\nwatcher runs --project mistral-lora\nwatcher inspect RUN_ID --advise\nwatcher compare RUN_A RUN_B --advise\nwatcher export RUN_ID --format capsule\nwatcher ui --port 7331">Copy</button>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="launcher-footer">
+              <span class="launcher-hint">Swipe, use arrow keys, or select an example.</span>
+              <div class="launcher-dots" role="tablist" aria-label="Select install or SDK example">
+                <button class="launcher-dot is-active" type="button" data-launcher-dot="0" aria-label="Show core installation" aria-selected="true"></button>
+                <button class="launcher-dot" type="button" data-launcher-dot="1" aria-label="Show optional integrations" aria-selected="false"></button>
+                <button class="launcher-dot" type="button" data-launcher-dot="2" aria-label="Show Python SDK example" aria-selected="false"></button>
+                <button class="launcher-dot" type="button" data-launcher-dot="3" aria-label="Show CLI example" aria-selected="false"></button>
+              </div>
+            </div>
+          </div>
           <div class="hero-actions">
             <a class="button button-primary" href="#workflow">See the agent loop</a>
             <a class="button button-ghost" href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">
@@ -402,12 +831,12 @@
           <div class="section-kicker">DESIGNED FOR THE TRAINING LOOP</div>
           <h2>Start with a small API. Unlock the full forensic loop.</h2>
           <p>WatcherML should remain useful as a lightweight recorder before the autonomous agent is enabled.</p>
-          <div class="install-note"><span>Alpha API preview</span><small>Package command shown for the planned public release.</small></div>
+          <div class="install-note"><span>Available through pip</span><small>Install the lean core, then add notebook and local UI extras only when needed.</small></div>
         </div>
         <div class="code-window reveal">
           <div class="code-tabs" role="tablist" aria-label="WatcherML code examples">
             <button class="code-tab active" type="button" data-code-tab="python">Python</button>
-            <button class="code-tab" type="button" data-code-tab="campaign">Campaign</button>
+            <button class="code-tab" type="button" data-code-tab="cli">CLI</button>
             <button class="copy-button" type="button" data-copy-code aria-label="Copy code">Copy</button>
           </div>
           <pre class="code-block active" data-code-panel="python"><code><span class="token-key">import</span> watcherml <span class="token-key">as</span> watcher
@@ -426,18 +855,19 @@ watcher.autopilot(
     contract=<span class="token-string">"campaign.yaml"</span>,
     agent=<span class="token-string">"ollama/qwen3"</span>,
 )</code></pre>
-          <pre class="code-block" data-code-panel="campaign"><code><span class="token-key">watcher</span> campaign start run_7f21 \
-  --objective validation_f1 \
-  --target 0.92 \
-  --max-trials 8 \
-  --max-gpu-hours 5 \
-  --agent ollama/qwen3
+          <pre class="code-block" data-code-panel="cli"><code><span class="token-comment"># Initialize local metadata and artifacts</span>
+<span class="token-key">watcher</span> init
 
-<span class="token-comment"># Watch the audit trail live</span>
-<span class="token-key">watcher</span> campaign inspect campaign_04
+<span class="token-comment"># Find and investigate a failed run</span>
+<span class="token-key">watcher</span> runs --project mistral-lora
+<span class="token-key">watcher</span> inspect run_7f21 --advise
 
-<span class="token-comment"># Export a verified recovery report</span>
-<span class="token-key">watcher</span> report campaign_04 --format html</code></pre>
+<span class="token-comment"># Compare evidence and export a reproduction capsule</span>
+<span class="token-key">watcher</span> compare run_7f21 run_8a03 --advise
+<span class="token-key">watcher</span> export run_7f21 --format capsule --out recovery.zip
+
+<span class="token-comment"># Open the local interface</span>
+<span class="token-key">watcher</span> ui --port 7331</code></pre>
         </div>
       </div>
     </section>
@@ -478,7 +908,7 @@ watcher.autopilot(
         <div class="cta-orbit orbit-one" aria-hidden="true"></div>
         <div class="cta-orbit orbit-two" aria-hidden="true"></div>
         <div class="cta-content">
-          <div class="eyebrow"><span class="pulse-dot"></span> Early open-source build</div>
+          <div class="eyebrow"><span class="pulse-dot"></span> Open-source · installable with pip</div>
           <h2>Help build the experiment engineer your GPU deserves.</h2>
           <p>Follow WatcherML on GitHub</p>
           <div class="hero-actions centered">
@@ -510,3 +940,104 @@ watcher.autopilot(
       <span>© <span data-year></span> WatcherML. Open-source. </span>
     </div>
   </footer>
+
+  <script>
+    (() => {
+      const launcher = document.querySelector('[data-launcher]');
+      if (!launcher) return;
+
+      const track = launcher.querySelector('[data-launcher-track]');
+      const viewport = launcher.querySelector('[data-launcher-viewport]');
+      const slides = Array.from(track.children);
+      const dots = Array.from(launcher.querySelectorAll('[data-launcher-dot]'));
+      const counter = launcher.querySelector('[data-launcher-counter]');
+      const prev = launcher.querySelector('[data-launcher-prev]');
+      const next = launcher.querySelector('[data-launcher-next]');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let index = 0;
+      let timer = null;
+      let pointerStart = null;
+
+      const stop = () => {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+      };
+
+      const start = () => {
+        if (reduceMotion || timer) return;
+        timer = window.setInterval(() => show(index + 1), 6500);
+      };
+
+      const restart = () => {
+        stop();
+        start();
+      };
+
+      const show = (nextIndex, userInitiated = false) => {
+        index = (nextIndex + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+        dots.forEach((dot, dotIndex) => {
+          const active = dotIndex === index;
+          dot.classList.toggle('is-active', active);
+          dot.setAttribute('aria-selected', String(active));
+        });
+        slides.forEach((slide, slideIndex) => slide.setAttribute('aria-hidden', String(slideIndex !== index)));
+        if (userInitiated) restart();
+      };
+
+      prev.addEventListener('click', () => show(index - 1, true));
+      next.addEventListener('click', () => show(index + 1, true));
+      dots.forEach(dot => dot.addEventListener('click', () => show(Number(dot.dataset.launcherDot), true)));
+
+      viewport.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          show(index - 1, true);
+        }
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          show(index + 1, true);
+        }
+      });
+
+      viewport.addEventListener('pointerdown', event => {
+        pointerStart = { x: event.clientX, y: event.clientY };
+      });
+
+      viewport.addEventListener('pointerup', event => {
+        if (!pointerStart) return;
+        const dx = event.clientX - pointerStart.x;
+        const dy = event.clientY - pointerStart.y;
+        pointerStart = null;
+        if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) {
+          show(index + (dx < 0 ? 1 : -1), true);
+        }
+      });
+
+      launcher.addEventListener('mouseenter', stop);
+      launcher.addEventListener('mouseleave', start);
+      launcher.addEventListener('focusin', stop);
+      launcher.addEventListener('focusout', event => {
+        if (!launcher.contains(event.relatedTarget)) start();
+      });
+
+      launcher.querySelectorAll('[data-copy-text]').forEach(button => {
+        button.addEventListener('click', async () => {
+          const original = button.textContent;
+          try {
+            await navigator.clipboard.writeText(button.dataset.copyText.replace(/\\n/g, '\n'));
+            button.textContent = 'Copied';
+          } catch {
+            button.textContent = 'Select code';
+          }
+          window.setTimeout(() => { button.textContent = original; }, 1500);
+        });
+      });
+
+      show(0);
+      start();
+    })();
+  </script>
+</body>
+</html>
