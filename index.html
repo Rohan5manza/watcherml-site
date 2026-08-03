@@ -301,6 +301,16 @@
       background: #8cffb0;
     }
 
+    .hero-launcher-shell {
+      position: relative;
+      z-index: 2;
+      margin-top: clamp(2rem, 4vw, 3.75rem);
+    }
+
+    .hero-launcher-shell .hero-launcher {
+      margin: 0;
+    }
+
     .hero-actions { position: relative; z-index: 1; }
 
     @keyframes launcherPulse {
@@ -314,7 +324,8 @@
     }
 
     @media (max-width: 760px) {
-      .hero-launcher { margin-top: 1.3rem; }
+      .hero-launcher-shell { margin-top: 2rem; }
+      .hero-launcher { margin-top: 0; }
       .launcher-slide {
         grid-template-columns: 1fr;
         align-items: start;
@@ -397,106 +408,6 @@
             WatcherML is a proactive forensics debugger for ML experiments. It autonomously captures evidence, diagnoses failures, proposes bounded interventions, reruns controlled trials, and proves which change actually worked.
           </p>
 
-          <div class="hero-launcher" id="install" data-launcher aria-label="Install and use WatcherML">
-            <div class="launcher-head">
-              <div class="launcher-badge"><span class="launcher-badge-dot"></span>Official PyPI install</div>
-              <div class="launcher-controls">
-                <span class="launcher-counter" data-launcher-counter>01 / 04</span>
-                <button class="launcher-arrow" type="button" data-launcher-prev aria-label="Previous example">←</button>
-                <button class="launcher-arrow" type="button" data-launcher-next aria-label="Next example">→</button>
-              </div>
-            </div>
-
-            <div class="launcher-viewport" data-launcher-viewport tabindex="0" aria-roledescription="carousel">
-              <div class="launcher-track" data-launcher-track>
-                <article class="launcher-slide" aria-label="1 of 4: Core installation">
-                  <div>
-                    <span class="launcher-kicker">Core recorder</span>
-                    <h3>Install the full local foundation.</h3>
-                    <p>Get the SDK, CLI, failure capsules, and recovery agent—without the notebook extension or web UI.</p>
-                    <div class="launcher-meta"><span>local-first</span><span>SDK + CLI</span><span>no web UI</span></div>
-                  </div>
-                  <div class="launcher-terminal">
-                    <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>terminal</span></div>
-                    <pre><code><span class="cmd">pip install</span> watcherml</code></pre>
-                    <button class="launcher-copy" type="button" data-copy-text="pip install watcherml">Copy</button>
-                  </div>
-                </article>
-
-                <article class="launcher-slide" aria-label="2 of 4: Optional integrations">
-                  <div>
-                    <span class="launcher-kicker">Choose your surface</span>
-                    <h3>Add notebooks, the local UI, or both.</h3>
-                    <p>Keep the core lean, then install only the integrations that match how you work.</p>
-                    <div class="launcher-meta"><span>%load_ext watcherml</span><span>watcher ui</span><span>optional extras</span></div>
-                  </div>
-                  <div class="launcher-terminal">
-                    <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>extras</span></div>
-                    <pre><code><span class="comment"># Jupyter / IPython</span>
-<span class="cmd">pip install</span> watcherml[notebook]
-
-<span class="comment"># Local web UI</span>
-<span class="cmd">pip install</span> watcherml[ui]
-
-<span class="comment"># Everything</span>
-<span class="cmd">pip install</span> watcherml[notebook,ui]</code></pre>
-                    <button class="launcher-copy" type="button" data-copy-text="pip install watcherml[notebook,ui]">Copy all</button>
-                  </div>
-                </article>
-
-                <article class="launcher-slide" aria-label="3 of 4: Python SDK example">
-                  <div>
-                    <span class="launcher-kicker">Python SDK</span>
-                    <h3>Wrap the training loop. Preserve the evidence.</h3>
-                    <p>Record configuration and run context with a small API, then let WatcherML freeze forensic evidence when execution fails.</p>
-                    <div class="launcher-meta"><span>context manager</span><span>run metadata</span><span>failure capsule</span></div>
-                  </div>
-                  <div class="launcher-terminal">
-                    <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>train.py</span></div>
-                    <pre><code><span class="flag">import</span> watcherml <span class="flag">as</span> watcher
-
-<span class="flag">with</span> watcher.run(
-    project=<span class="string">"mistral-lora"</span>,
-    config=config,
-) <span class="flag">as</span> run:
-    train(model, dataset, run=run)</code></pre>
-                    <button class="launcher-copy" type="button" data-copy-text="import watcherml as watcher\n\nwith watcher.run(\n    project=\"mistral-lora\",\n    config=config,\n) as run:\n    train(model, dataset, run=run)">Copy</button>
-                  </div>
-                </article>
-
-                <article class="launcher-slide" aria-label="4 of 4: WatcherML CLI example">
-                  <div>
-                    <span class="launcher-kicker">Forensics from the terminal</span>
-                    <h3>Inspect, compare, explain, and export.</h3>
-                    <p>Move from a failed run to an auditable diagnosis without leaving your local development workflow.</p>
-                    <div class="launcher-command-cloud" aria-label="Available CLI commands">
-                      <span>init</span><span>runs</span><span>inspect</span><span>failures</span><span>compare</span><span>advise</span><span>export</span><span>recoveries</span><span>recovery</span><span>ui</span>
-                    </div>
-                  </div>
-                  <div class="launcher-terminal">
-                    <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>watcher CLI</span></div>
-                    <pre><code><span class="cmd">watcher</span> init
-<span class="cmd">watcher</span> runs <span class="flag">--project</span> mistral-lora
-<span class="cmd">watcher</span> inspect RUN_ID <span class="flag">--advise</span>
-<span class="cmd">watcher</span> compare RUN_A RUN_B <span class="flag">--advise</span>
-<span class="cmd">watcher</span> export RUN_ID <span class="flag">--format</span> capsule
-<span class="cmd">watcher</span> ui <span class="flag">--port</span> 7331</code></pre>
-                    <button class="launcher-copy" type="button" data-copy-text="watcher init\nwatcher runs --project mistral-lora\nwatcher inspect RUN_ID --advise\nwatcher compare RUN_A RUN_B --advise\nwatcher export RUN_ID --format capsule\nwatcher ui --port 7331">Copy</button>
-                  </div>
-                </article>
-              </div>
-            </div>
-
-            <div class="launcher-footer">
-              <span class="launcher-hint">Swipe, use arrow keys, or select an example.</span>
-              <div class="launcher-dots" role="tablist" aria-label="Select install or SDK example">
-                <button class="launcher-dot is-active" type="button" data-launcher-dot="0" aria-label="Show core installation" aria-selected="true"></button>
-                <button class="launcher-dot" type="button" data-launcher-dot="1" aria-label="Show optional integrations" aria-selected="false"></button>
-                <button class="launcher-dot" type="button" data-launcher-dot="2" aria-label="Show Python SDK example" aria-selected="false"></button>
-                <button class="launcher-dot" type="button" data-launcher-dot="3" aria-label="Show CLI example" aria-selected="false"></button>
-              </div>
-            </div>
-          </div>
           <div class="hero-actions">
             <a class="button button-primary" href="#workflow">See the agent loop</a>
             <a class="button button-ghost" href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">
@@ -599,6 +510,109 @@
           <div class="floating-card floating-right">
             <span class="float-icon sparkle">✦</span>
             <div><strong>Ollama local</strong><small>No run data leaves Buffy</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shell hero-launcher-shell reveal">
+        <div class="hero-launcher" id="install" data-launcher aria-label="Install and use WatcherML">
+          <div class="launcher-head">
+            <div class="launcher-badge"><span class="launcher-badge-dot"></span>Official PyPI install</div>
+            <div class="launcher-controls">
+              <span class="launcher-counter" data-launcher-counter>01 / 04</span>
+              <button class="launcher-arrow" type="button" data-launcher-prev aria-label="Previous example">←</button>
+              <button class="launcher-arrow" type="button" data-launcher-next aria-label="Next example">→</button>
+            </div>
+          </div>
+
+          <div class="launcher-viewport" data-launcher-viewport tabindex="0" aria-roledescription="carousel">
+            <div class="launcher-track" data-launcher-track>
+              <article class="launcher-slide" aria-label="1 of 4: Core installation">
+                <div>
+                  <span class="launcher-kicker">Core recorder</span>
+                  <h3>Install the full local foundation.</h3>
+                  <p>Get the SDK, CLI, failure capsules, and recovery agent—without the notebook extension or web UI.</p>
+                  <div class="launcher-meta"><span>local-first</span><span>SDK + CLI</span><span>no web UI</span></div>
+                </div>
+                <div class="launcher-terminal">
+                  <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>terminal</span></div>
+                  <pre><code><span class="cmd">pip install</span> watcherml</code></pre>
+                  <button class="launcher-copy" type="button" data-copy-text="pip install watcherml">Copy</button>
+                </div>
+              </article>
+
+              <article class="launcher-slide" aria-label="2 of 4: Optional integrations">
+                <div>
+                  <span class="launcher-kicker">Choose your surface</span>
+                  <h3>Add notebooks, the local UI, or both.</h3>
+                  <p>Keep the core lean, then install only the integrations that match how you work.</p>
+                  <div class="launcher-meta"><span>%load_ext watcherml</span><span>watcher ui</span><span>optional extras</span></div>
+                </div>
+                <div class="launcher-terminal">
+                  <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>extras</span></div>
+                  <pre><code><span class="comment"># Jupyter / IPython</span>
+<span class="cmd">pip install</span> watcherml[notebook]
+
+<span class="comment"># Local web UI</span>
+<span class="cmd">pip install</span> watcherml[ui]
+
+<span class="comment"># Everything</span>
+<span class="cmd">pip install</span> watcherml[notebook,ui]</code></pre>
+                  <button class="launcher-copy" type="button" data-copy-text="pip install watcherml[notebook,ui]">Copy all</button>
+                </div>
+              </article>
+
+              <article class="launcher-slide" aria-label="3 of 4: Python SDK example">
+                <div>
+                  <span class="launcher-kicker">Python SDK</span>
+                  <h3>Wrap the training loop. Preserve the evidence.</h3>
+                  <p>Record configuration and run context with a small API, then let WatcherML freeze forensic evidence when execution fails.</p>
+                  <div class="launcher-meta"><span>context manager</span><span>run metadata</span><span>failure capsule</span></div>
+                </div>
+                <div class="launcher-terminal">
+                  <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>train.py</span></div>
+                  <pre><code><span class="flag">import</span> watcherml <span class="flag">as</span> watcher
+
+<span class="flag">with</span> watcher.run(
+    project=<span class="string">"mistral-lora"</span>,
+    config=config,
+) <span class="flag">as</span> run:
+    train(model, dataset, run=run)</code></pre>
+                  <button class="launcher-copy" type="button" data-copy-text="import watcherml as watcher\n\nwith watcher.run(\n    project=\"mistral-lora\",\n    config=config,\n) as run:\n    train(model, dataset, run=run)">Copy</button>
+                </div>
+              </article>
+
+              <article class="launcher-slide" aria-label="4 of 4: WatcherML CLI example">
+                <div>
+                  <span class="launcher-kicker">Forensics from the terminal</span>
+                  <h3>Inspect, compare, explain, and export.</h3>
+                  <p>Move from a failed run to an auditable diagnosis without leaving your local development workflow.</p>
+                  <div class="launcher-command-cloud" aria-label="Available CLI commands">
+                    <span>init</span><span>runs</span><span>inspect</span><span>failures</span><span>compare</span><span>advise</span><span>export</span><span>recoveries</span><span>recovery</span><span>ui</span>
+                  </div>
+                </div>
+                <div class="launcher-terminal">
+                  <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>watcher CLI</span></div>
+                  <pre><code><span class="cmd">watcher</span> init
+<span class="cmd">watcher</span> runs <span class="flag">--project</span> mistral-lora
+<span class="cmd">watcher</span> inspect RUN_ID <span class="flag">--advise</span>
+<span class="cmd">watcher</span> compare RUN_A RUN_B <span class="flag">--advise</span>
+<span class="cmd">watcher</span> export RUN_ID <span class="flag">--format</span> capsule
+<span class="cmd">watcher</span> ui <span class="flag">--port</span> 7331</code></pre>
+                  <button class="launcher-copy" type="button" data-copy-text="watcher init\nwatcher runs --project mistral-lora\nwatcher inspect RUN_ID --advise\nwatcher compare RUN_A RUN_B --advise\nwatcher export RUN_ID --format capsule\nwatcher ui --port 7331">Copy</button>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="launcher-footer">
+            <span class="launcher-hint">Swipe, use arrow keys, or select an example.</span>
+            <div class="launcher-dots" role="tablist" aria-label="Select install or SDK example">
+              <button class="launcher-dot is-active" type="button" data-launcher-dot="0" aria-label="Show core installation" aria-selected="true"></button>
+              <button class="launcher-dot" type="button" data-launcher-dot="1" aria-label="Show optional integrations" aria-selected="false"></button>
+              <button class="launcher-dot" type="button" data-launcher-dot="2" aria-label="Show Python SDK example" aria-selected="false"></button>
+              <button class="launcher-dot" type="button" data-launcher-dot="3" aria-label="Show CLI example" aria-selected="false"></button>
+            </div>
           </div>
         </div>
       </div>
