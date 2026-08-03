@@ -308,11 +308,13 @@
       position: relative;
       z-index: 1;
       display: block !important;
-      flex: 1 1 100%;
+      flex: 0 1 auto;
       grid-column: 1 / -1;
-      justify-self: stretch;
-      width: 100%;
+      justify-self: center;
+      width: min(1240px, calc(100% - 40px));
+      max-width: 1240px;
       margin-inline: auto;
+      box-sizing: border-box;
     }
 
     .hero-shell > .hero-grid {
@@ -348,9 +350,9 @@
     @media (min-width: 981px) {
       .hero-shell > .hero-grid {
         display: grid;
-        grid-template-columns: minmax(21rem, .88fr) minmax(0, 1.32fr);
+        grid-template-columns: minmax(21rem, .92fr) minmax(0, 1.08fr);
         align-items: center;
-        gap: clamp(2.5rem, 5vw, 5rem);
+        gap: clamp(2.25rem, 4vw, 3.75rem);
       }
 
       .hero-shell .hero-copy,
@@ -372,6 +374,9 @@
     }
 
     @media (max-width: 760px) {
+      .hero > .hero-shell {
+        width: min(100% - 24px, 1240px);
+      }
       .hero-launcher-shell { margin-top: 2rem; }
       .hero-launcher { margin-top: 0; }
       .launcher-slide {
@@ -465,7 +470,7 @@
             </a>
           </div>
           <div class="hero-proof">
-            <div><strong>Private by default</strong><span>Ollama runs locally</span></div>
+            <div><strong>Private by default</strong><span>Plug in your local Ollama</span></div>
             <div><strong>Evidence-backed</strong><span>Every action is traceable</span></div>
             <div><strong>Budget-aware</strong><span>Bounded GPU trials</span></div>
           </div>
@@ -655,7 +660,6 @@
           </div>
 
           <div class="launcher-footer">
-            <span class="launcher-hint">Swipe, use arrow keys, or select an example.</span>
             <div class="launcher-dots" role="tablist" aria-label="Select install or SDK example">
               <button class="launcher-dot is-active" type="button" data-launcher-dot="0" aria-label="Show core installation" aria-selected="true"></button>
               <button class="launcher-dot" type="button" data-launcher-dot="1" aria-label="Show optional integrations" aria-selected="false"></button>
@@ -712,7 +716,7 @@
 
     <section class="section workflow-section" id="workflow">
       <div class="shell center-heading reveal">
-        <div class="section-kicker">AUTONOMOUS, NOT UNBOUNDED</div>
+        <div class="section-kicker">AUTONOMOUS AND NBOUNDED</div>
         <h2>A scientific loop for every experiment.</h2>
         <p>WatcherML separates observation, reasoning, execution, and evaluation so the agent can act without becoming a black box.</p>
       </div>
@@ -945,11 +949,11 @@ watcher.autopilot(
           <a class="inline-arrow" href="#early-access">Read the design principles <span>→</span></a>
         </div>
         <div class="guardrail-grid reveal">
-          <div><span>02</span><b>No open shell</b><small>Structured, allowlisted actions instead of arbitrary commands.</small></div>
-          <div><span>03</span><b>Hard budgets</b><small>Limits for GPU-hours, wall time, trials, disk, and memory.</small></div>
-          <div><span>04</span><b>Human gates</b><small>Approval before code, dependency, or dataset changes.</small></div>
-          <div><span>05</span><b>Private defaults</b><small>Local inference and redacted forensic evidence.</small></div>
-          <div><span>06</span><b>Deterministic verdicts</b><small>Metrics and tests—not the LLM—decide success.</small></div>
+          <div><span>01</span><b>No open shell</b><small>Structured, allowlisted actions instead of arbitrary commands.</small></div>
+          <div><span>02</span><b>Hard budgets</b><small>Limits for GPU-hours, wall time, trials, disk, and memory.</small></div>
+          <div><span>03</span><b>Human gates</b><small>Approval before code, dependency, or dataset changes.</small></div>
+          <div><span>04</span><b>Private defaults</b><small>Local inference and redacted forensic evidence.</small></div>
+          <div><span>05</span><b>Deterministic verdicts</b><small>Metrics and tests—not the LLM—decide success.</small></div>
         </div>
       </div>
     </section>
@@ -958,7 +962,6 @@ watcher.autopilot(
       <div class="shell center-heading reveal">
         <div class="section-kicker">BUILT IN PUBLIC</div>
         <h2>A real MLOps system, tested on Nvidia GPUs.</h2>
-        <p>WatcherML is being developed against practical constraints: one RTX 4060 Ti, local Ollama inference, notebook-first experiments, and the need to make every GPU-hour count.</p>
       </div>
       <div class="shell build-stats reveal">
         <div><strong>Open</strong><span>Python package</span></div>
@@ -974,7 +977,7 @@ watcher.autopilot(
         <div class="cta-content">
           <div class="eyebrow"><span class="pulse-dot"></span> Open-source · installable with pip</div>
           <h2>Help build the experiment engineer your GPU deserves.</h2>
-          <p>Follow WatcherML on GitHub</p>
+          <p>Have new ideas and want to contribute? Open a new pull request on Github!</p>
           <div class="hero-actions centered">
             <a class="button button-light" href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">Follow on GitHub</a>
             <a class="button button-transparent" href="https://github.com/Rohan5manza" target="_blank" rel="noreferrer">Meet the builder</a>
