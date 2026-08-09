@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="WatcherML is a local autonomous experiment engineer for PyTorch. It investigates failed and underperforming runs, proposes evidence-backed interventions, executes bounded trials, and verifies what worked." />
+  <meta name="description" content="WatcherML is a local deterministic experiment engineer for PyTorch. It investigates failed and underperforming runs, proposes evidence-backed interventions, executes bounded trials, and verifies what worked." />
   <meta name="theme-color" content="#090b10" />
-  <meta property="og:title" content="WatcherML — Your first proactive forensics debugger" />
-  <meta property="og:description" content="A local-first forensic debugger and autonomous experiment engineer for PyTorch." />
+  <meta property="og:title" content="WatcherML — Your first recovery and reliability layer for ML experiments" />
+  <meta property="og:description" content="A local-first forensic debugger and experiment engineer for PyTorch." />
   <meta property="og:type" content="website" />
-  <title>WatcherML — Proactive ML Experiment Forensics</title>
+  <title>WatcherML — Recovery and forensics layer for ML experiments</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
 
@@ -459,20 +459,20 @@
           </div>
           <h1>From failed run to <span class="gradient-text">verified fix</span></h1>
           <p class="hero-lede">
-            WatcherML is a proactive forensics debugger for ML experiments. It autonomously captures evidence, diagnoses failures, proposes bounded interventions, reruns controlled trials, and proves which change actually worked.
+            WatcherML is the reliability and recovery layer for ML training. It captures evidence, diagnoses failures, proposes bounded interventions, reruns controlled trials, and proves which change actually worked.
           </p>
 
           <div class="hero-actions">
-            <a class="button button-primary" href="#workflow">See the agent loop</a>
+            <a class="button button-primary" href="#workflow">See the recovery loop</a>
             <a class="button button-ghost" href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.3 11.3 0 0 0-3.6 22c.6.1.8-.2.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C16.1 5.3 17.1 5.6 17.1 5.6c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.8 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6A11.3 11.3 0 0 0 12 .8Z" /></svg>
               View source
             </a>
           </div>
           <div class="hero-proof">
-            <div><strong>Private by default</strong><span>Plug in your local Ollama</span></div>
-            <div><strong>Evidence-backed</strong><span>Every action is traceable</span></div>
-            <div><strong>Budget-aware</strong><span>Bounded GPU trials</span></div>
+            <div><strong>Deterministic-first</strong><span>Diagnosis works without an LLM</span></div>
+            <div><strong>LLM optional</strong><span>Local or cloud via any-llm</span></div>
+            <div><strong>Plays well with others</strong><span>Standalone or export to MLflow / W&B</span></div>
           </div>
         </div>
 
@@ -482,7 +482,7 @@
             <div class="window-topbar">
               <div class="window-dots"><span></span><span></span><span></span></div>
               <div class="window-title">campaign / llama-lora-recovery</div>
-              <div class="status-chip"><span></span> agent active</div>
+              <div class="status-chip"><span></span> recovery active</div>
             </div>
 
             <div class="window-body">
@@ -518,7 +518,7 @@
                 <div class="mock-grid">
                   <div class="panel agent-panel">
                     <div class="panel-head">
-                      <span>Agent reasoning</span>
+                      <span>Recovery reasoning</span>
                       <span class="live-badge">LIVE</span>
                     </div>
                     <div class="agent-log" data-agent-log aria-live="polite">
@@ -585,7 +585,7 @@
                 <div>
                   <span class="launcher-kicker">Core recorder</span>
                   <h3>Install the full local foundation.</h3>
-                  <p>Get the SDK, CLI, failure capsules, and recovery agent—without the notebook extension or web UI.</p>
+                  <p>Get the SDK, CLI, failure capsules, and recovery —without the notebook extension or web UI.</p>
                   <div class="launcher-meta"><span>local-first</span><span>SDK + CLI</span><span>no web UI</span></div>
                 </div>
                 <div class="launcher-terminal">
@@ -716,9 +716,9 @@
 
     <section class="section workflow-section" id="workflow">
       <div class="shell center-heading reveal">
-        <div class="section-kicker">AUTONOMOUS AND NBOUNDED</div>
-        <h2>A scientific loop for every experiment.</h2>
-        <p>WatcherML separates observation, reasoning, execution, and evaluation so the agent can act without becoming a black box.</p>
+        <div class="section-kicker">FIRST RECOVERY VERTICAL</div>
+        <h2>A scientific loop for every CUDA OOM.</h2>
+        <p>OOM is the first proof point, but not the entire identity of WatcherML. It is common, reproducible, measurable, and constrained enough to build a recovery engine that users can trust.</p>
       </div>
 
       <div class="shell workflow-layout">
@@ -733,16 +733,16 @@
             <span>03</span><div><b>Intervene</b><small>Run isolated variants</small></div>
           </button>
           <button class="workflow-tab" type="button" role="tab" aria-selected="false" data-workflow-tab="evaluate">
-            <span>04</span><div><b>Evaluate</b><small>Verify against the contract</small></div>
+            <span>04</span><div><b>Evaluate</b><small>Verify against the OOM policy</small></div>
           </button>
           <button class="workflow-tab" type="button" role="tab" aria-selected="false" data-workflow-tab="remember">
-            <span>05</span><div><b>Remember</b><small>Build resolution memory</small></div>
+            <span>05</span><div><b>Remember</b><small>Build memory for future runs</small></div>
           </button>
         </div>
 
         <div class="workflow-stage reveal" data-workflow-stage>
           <div class="stage-topbar">
-            <div><span class="stage-light"></span><span>watcher agent / <b data-stage-id>observe</b></span></div>
+            <div><span class="stage-light"></span><span>watcherml / <b data-stage-id>observe</b></span></div>
             <span>LOCAL</span>
           </div>
           <div class="stage-content">
@@ -797,14 +797,14 @@
 
         <article class="capability-card reveal">
           <div class="cap-icon cap-orange">✦</div>
-          <div class="cap-meta">LOCAL OLLAMA AGENT</div>
+          <div class="cap-meta">OPTIONAL LLM INTEGRATION</div>
           <h3>Reason over private evidence locally.</h3>
-          <p>Use structured Ollama tool calls to produce hypotheses and experiment plans while keeping stack traces, metrics, and source changes on your machine.</p>
+          <p>Use structured any-llm tool calls to produce hypotheses and experiment plans while keeping stack traces, metrics, and source changes on your machine.</p>
         </article>
 
         <article class="capability-card reveal">
           <div class="cap-icon cap-blue">↻</div>
-          <div class="cap-meta">BOUNDED AUTOPILOT</div>
+          <div class="cap-meta">BOUNDED RECOVERY CAMPAIGNS</div>
           <h3>Run controlled variants—not infinite guesses.</h3>
           <p>Enforce trial, time, GPU, file-change, and parameter budgets. Require approval before code, dependency, or dataset changes.</p>
         </article>
@@ -828,8 +828,8 @@
     <section class="section campaign-section">
       <div class="shell campaign-card reveal">
         <div class="campaign-copy">
-          <div class="section-kicker">DEFINE SUCCESS BEFORE AUTONOMY</div>
-          <h2>Every campaign runs against a contract.</h2>
+          <div class="section-kicker">DEFINE SUCCESS BEFORE RECOVERY LOOP</div>
+          <h2>Every campaign runs against a strict contract.</h2>
           <p>Set a primary metric, operational constraints, permissions, and a hard budget. WatcherML stops when the goal is met, the budget is exhausted, or human approval is required.</p>
           <ul class="check-list">
             <li>Explicit metric and acceptance threshold</li>
@@ -860,45 +860,22 @@
       </div>
     </section>
 
-    <section class="section architecture-section" id="architecture">
-      <div class="shell center-heading reveal">
-        <div class="section-kicker">ARCHITECTURE</div>
-        <h2>One focused layer above your existing stack.</h2>
-        <p>Keep MLflow or W&B as your system of record. Add WatcherML for forensics, intervention, verification, and local agent reasoning.</p>
-      </div>
-
-      <div class="shell architecture-board reveal">
-        <div class="architecture-row sources-row">
-          <div class="arch-node"><span>PyTorch</span><small>training loop</small></div>
-          <div class="arch-node"><span>Jupyter</span><small>notebook cells</small></div>
-          <div class="arch-node"><span>MLflow / W&B</span><small>optional export</small></div>
-        </div>
-        <div class="flow-arrow"><span>runtime events</span></div>
-        <div class="architecture-core">
-          <div class="core-head"><span class="brand-mark mini" aria-hidden="true">W</span><div><b>WatcherML Runtime</b><small>local Python package</small></div></div>
-          <div class="core-grid">
-            <div><b>Recorder</b><small>metrics · Git · GPU · tensors</small></div>
-            <div><b>Forensics</b><small>capsules · signatures · diffs</small></div>
-            <div><b>Policy engine</b><small>budgets · permissions · isolation</small></div>
-            <div><b>Evaluator</b><small>metrics · constraints · verification</small></div>
-          </div>
-        </div>
-        <div class="bidirectional-arrow"><span>structured tools</span></div>
-        <div class="architecture-row services-row">
-          <div class="arch-node accent"><span>Ollama</span><small>diagnosis & planning</small></div>
-          <div class="arch-node accent"><span>Optuna</span><small>numeric search</small></div>
-          <div class="arch-node accent"><span>Isolated runner</span><small>worktree / container</small></div>
-          <div class="arch-node accent"><span>Resolution graph</span><small>verified outcomes</small></div>
-        </div>
-      </div>
-    </section>
+   <section class="section architecture-section" id="architecture">
+     <div class="section-heading centered"><span class="kicker">FOCUSED BY DESIGN</span>
+       <h2>A recovery layer—not another platform rewrite.</h2><p>Use WatcherML by itself for local experiments, or connect it to the tracking system your team already trusts.</p>
+     </div><div class="architecture"><div class="arch-sources"><span>PyTorch training</span><span>Jupyter notebooks</span><span>MLflow / W&amp;B</span></div><div class="down-arrow">runtime events ↓</div>
+       <div class="arch-core"><div class="core-title"><span class="brand-mark small">W</span><div><b>WatcherML</b><small>local reliability runtime</small></div></div><div class="core-grid"><div>
+         <b>Recorder</b><small>runs · metrics · environment</small></div><div><b>Forensics</b><small>capsules · evidence · diffs</small></div><div><b>Policy engine</b><small>actions · budgets · approvals
+         </small></div><div><b>Trial runner</b><small>fresh isolated processes</small></div><div><b>Verifier</b><small>runtime · metrics · constraints</small></div><div><b>Resolution memory</b>
+           <small>verified outcomes only</small></div></div></div><div class="arch-optional"><span><b>any-llm</b><small>optional planning and explanation</small></span><span><b>MLflow sink</b>
+             <small>optional campaign export</small></span><span><b>W&amp;B sink</b><small>optional campaign export</small></span></div></div></section>
 
     <section class="section code-section">
       <div class="shell code-layout">
         <div class="code-copy reveal">
           <div class="section-kicker">DESIGNED FOR THE TRAINING LOOP</div>
           <h2>Start with a small API. Unlock the full forensic loop.</h2>
-          <p>WatcherML should remain useful as a lightweight recorder before the autonomous agent is enabled.</p>
+          <p>WatcherML is your recovery layer powered even better with any LLM of your choice.</p>
           <div class="install-note"><span>Available through pip</span><small>Install the lean core, then add notebook and local UI extras only when needed.</small></div>
         </div>
         <div class="code-window reveal">
@@ -944,7 +921,7 @@ watcher.autopilot(
       <div class="shell safety-grid">
         <div class="safety-copy reveal">
           <div class="section-kicker">SAFE BY CONSTRUCTION</div>
-          <h2>The agent never gets a blank check.</h2>
+          <h2>WatcherML never gets a blank check.</h2>
           <p>Autonomy without guardrails is just expensive uncertainty. WatcherML constrains what can change, where code can run, and when a human must approve the next step.</p>
           <a class="inline-arrow" href="#early-access">Read the design principles <span>→</span></a>
         </div>
@@ -965,7 +942,7 @@ watcher.autopilot(
       </div>
       <div class="shell build-stats reveal">
         <div><strong>Open</strong><span>Python package</span></div>
-        <div><strong>Local</strong><span>Reasoning powered by Ollama</span></div>
+        <div><strong>Local</strong><span>Deterministic Recovery</span></div>
         <div><strong>Auditable</strong><span>Every intervention recorded</span></div>
         <div><strong>Verified</strong><span>Fixes proven through controlled reruns</span></div>
       </div>
@@ -997,10 +974,10 @@ watcher.autopilot(
           </span>
           <span>Watcher<span class="brand-accent">ML</span></span>
         </a>
-        <p>Open-source proactive forensics debugger for ML experiments.</p>
+        <p>Open-source recovery layer for ML experiments.</p>
       </div>
       <div class="footer-links">
-        <div><b>Project</b><a href="#capabilities">Capabilities</a><a href="#workflow">Agent loop</a><a href="#architecture">Architecture</a></div>
+        <div><b>Project</b><a href="#capabilities">Capabilities</a><a href="#workflow">Recovery loop</a><a href="#architecture">Architecture</a></div>
         <div><b>Resources</b><a href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">GitHub</a><a href="#early-access">Roadmap</a><a href="#safety">Safety</a></div>
       </div>
     </div>
