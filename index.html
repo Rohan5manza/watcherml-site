@@ -425,7 +425,6 @@
       <nav class="desktop-nav" aria-label="Primary navigation">
         <a href="#capabilities">Capabilities</a>
         <a href="#workflow">How it works</a>
-        <a href="#architecture">Architecture</a>
         <a href="#safety">Safety</a>
       </nav>
 
@@ -441,7 +440,6 @@
     <div class="mobile-menu" data-mobile-menu>
       <a href="#capabilities">Capabilities</a>
       <a href="#workflow">How it works</a>
-      <a href="#architecture">Architecture</a>
       <a href="#safety">Safety</a>
       <a href="#install">Install</a>
       <a href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">GitHub</a>
@@ -878,226 +876,352 @@
       </div>
     </section>
 
-    <section class="section workflow-section" id="workflow">
-      <div class="shell center-heading reveal">
-        <div class="section-kicker">FIRST RECOVERY VERTICAL</div>
-        <h2>A scientific loop for every CUDA OOM.</h2>
-        <p>OOM is the first proof point, but not the entire identity of WatcherML. It is common, reproducible, measurable, and constrained enough to build a recovery engine that users can trust.</p>
+
+<section class="section workflow-section" id="workflow">
+  <div class="shell center-heading reveal">
+    <div class="section-kicker">V1 PROOF VERTICAL · CUDA OOM RECOVERY</div>
+    <h2>Turn one CUDA OOM into a controlled recovery experiment.</h2>
+    <p>WatcherML is a local-first reliability layer for ML training—not another experiment-tracking platform. V1 starts with one failure class that can be captured, changed, rerun, and verified without guesswork.</p>
+  </div>
+
+  <div class="shell workflow-layout">
+    <div class="workflow-tabs reveal" role="tablist" aria-label="WatcherML deterministic OOM recovery workflow">
+      <button id="workflow-tab-capture" class="workflow-tab active" type="button" role="tab" aria-selected="true" aria-controls="workflow-stage" data-workflow-tab="capture">
+        <span>01</span><div><b>Capture</b><small>Freeze versioned evidence</small></div>
+      </button>
+      <button id="workflow-tab-classify" class="workflow-tab" type="button" role="tab" aria-selected="false" aria-controls="workflow-stage" data-workflow-tab="classify">
+        <span>02</span><div><b>Classify</b><small>Apply a deterministic rule</small></div>
+      </button>
+      <button id="workflow-tab-propose" class="workflow-tab" type="button" role="tab" aria-selected="false" aria-controls="workflow-stage" data-workflow-tab="propose">
+        <span>03</span><div><b>Propose</b><small>Choose one bounded change</small></div>
+      </button>
+      <button id="workflow-tab-trial" class="workflow-tab" type="button" role="tab" aria-selected="false" aria-controls="workflow-stage" data-workflow-tab="trial">
+        <span>04</span><div><b>Trial</b><small>Run in a fresh process</small></div>
+      </button>
+      <button id="workflow-tab-verify" class="workflow-tab" type="button" role="tab" aria-selected="false" aria-controls="workflow-stage" data-workflow-tab="verify">
+        <span>05</span><div><b>Verify</b><small>Confirm recovery by contract</small></div>
+      </button>
+    </div>
+
+    <div id="workflow-stage" class="workflow-stage reveal" data-workflow-stage role="tabpanel" aria-labelledby="workflow-tab-capture">
+      <div class="stage-topbar">
+        <div><span class="stage-light"></span><span>watcherml / <b data-stage-id>capture</b></span></div>
+        <span>LOCAL · DETERMINISTIC</span>
       </div>
-
-      <div class="shell workflow-layout">
-        <div class="workflow-tabs reveal" role="tablist" aria-label="WatcherML agent workflow">
-          <button class="workflow-tab active" type="button" role="tab" aria-selected="true" data-workflow-tab="observe">
-            <span>01</span><div><b>Observe</b><small>Freeze the evidence</small></div>
-          </button>
-          <button class="workflow-tab" type="button" role="tab" aria-selected="false" data-workflow-tab="hypothesize">
-            <span>02</span><div><b>Hypothesize</b><small>Rank likely causes</small></div>
-          </button>
-          <button class="workflow-tab" type="button" role="tab" aria-selected="false" data-workflow-tab="intervene">
-            <span>03</span><div><b>Intervene</b><small>Run isolated variants</small></div>
-          </button>
-          <button class="workflow-tab" type="button" role="tab" aria-selected="false" data-workflow-tab="evaluate">
-            <span>04</span><div><b>Evaluate</b><small>Verify against the OOM policy</small></div>
-          </button>
-          <button class="workflow-tab" type="button" role="tab" aria-selected="false" data-workflow-tab="remember">
-            <span>05</span><div><b>Remember</b><small>Build memory for future runs</small></div>
-          </button>
-        </div>
-
-        <div class="workflow-stage reveal" data-workflow-stage>
-          <div class="stage-topbar">
-            <div><span class="stage-light"></span><span>watcherml / <b data-stage-id>observe</b></span></div>
-            <span>LOCAL</span>
-          </div>
-          <div class="stage-content">
-            <div class="stage-copy">
-              <span class="stage-number" data-stage-number>01</span>
-              <h3 data-stage-title>Freeze the state around failure.</h3>
-              <p data-stage-description>Capture stack frames, tensor summaries, allocator state, recent metrics, Git changes, environment drift, and the last successful step.</p>
-              <div class="stage-tags" data-stage-tags>
-                <span>CUDA state</span><span>tensor shapes</span><span>Git diff</span><span>stdout</span>
-              </div>
-            </div>
-            <div class="stage-code">
-              <div class="code-line"><span class="line-no">1</span><code><i>capsule</i> = watcher.capture(run)</code></div>
-              <div class="code-line"><span class="line-no">2</span><code>capsule.failure = <em>"cuda_oom"</em></code></div>
-              <div class="code-line"><span class="line-no">3</span><code>capsule.peak_vram = <strong>15.88</strong></code></div>
-              <div class="code-line"><span class="line-no">4</span><code>capsule.last_step = <strong>417</strong></code></div>
-              <div class="code-line"><span class="line-no">5</span><code>capsule.freeze()</code></div>
-            </div>
+      <div class="stage-content">
+        <div class="stage-copy">
+          <span class="stage-number" data-stage-number>01</span>
+          <h3 data-stage-title>Capture the evidence that actually existed at failure.</h3>
+          <p data-stage-description>Persist a versioned capsule with the traceback, configuration, last logged step, recent metrics, sampled resources, environment fingerprint, Git state, dataset fingerprint, and optional CUDA allocator bytes.</p>
+          <div class="stage-tags" data-stage-tags>
+            <span>schema 1.0</span><span>traceback</span><span>allocator state</span><span>capture score</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section capabilities-section" id="capabilities">
-      <div class="shell split-heading reveal">
-        <div>
-          <div class="section-kicker">CAPABILITIES</div>
-          <h2>Everything needed to go from failure to evidence-backed progress.</h2>
+        <div class="stage-code" data-stage-code>
+          <div class="code-line"><span class="line-no">1</span><code>capsule.schema.version = <em>"1.0"</em></code></div>
+          <div class="code-line"><span class="line-no">2</span><code>capsule.failure.class = <em>"cuda_out_of_memory"</em></code></div>
+          <div class="code-line"><span class="line-no">3</span><code>capsule.evidence.training_state.last_logged_step = <strong>417</strong></code></div>
+          <div class="code-line"><span class="line-no">4</span><code>capsule.capture = { score: <strong>8</strong>, maximum: <strong>10</strong> }</code></div>
         </div>
-        <p>A focused layer for PyTorch forensics and controlled experimentation—not another general-purpose dashboard.</p>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="shell capability-grid">
-        <article class="capability-card feature-card reveal">
-          <div class="cap-icon cap-green">⌁</div>
-          <div class="cap-meta">FORENSIC CAPSULES</div>
-          <h3>Capture the moment a run goes wrong.</h3>
-          <p>Preserve the execution context around crashes, numerical instability, stalls, and regressions without collecting raw training data by default.</p>
-          <div class="mini-forensic">
-            <div><span>Failure class</span><b>NaN loss</b></div>
-            <div><span>First invalid layer</span><b>encoder.9.mlp</b></div>
-            <div><span>Gradient norm</span><b class="error-text">∞</b></div>
-          </div>
-        </article>
+<section class="section capabilities-section" id="capabilities">
+  <div class="shell split-heading reveal">
+    <div>
+      <div class="section-kicker">WATCHERML V1</div>
+      <h2>The complete path from CUDA OOM evidence to verified recovery.</h2>
+    </div>
+    <p>Use WatcherML alongside MLflow, W&amp;B, or your existing tracker. V1 owns the reliability loop they do not: deterministic failure evidence and controlled reruns.</p>
+  </div>
 
-        <article class="capability-card reveal">
-          <div class="cap-icon cap-purple">⌕</div>
-          <div class="cap-meta">NEAREST-SUCCESS DIFF</div>
-          <h3>Compare against the right baseline automatically.</h3>
-          <p>Find the closest successful run by model, data fingerprint, hardware, configuration, and Git ancestry—then rank the differences most likely to matter.</p>
-        </article>
-
-        <article class="capability-card reveal">
-          <div class="cap-icon cap-orange">✦</div>
-          <div class="cap-meta">OPTIONAL LLM INTEGRATION</div>
-          <h3>Reason over private evidence locally.</h3>
-          <p>Use structured any-llm tool calls to produce hypotheses and experiment plans while keeping stack traces, metrics, and source changes on your machine.</p>
-        </article>
-
-        <article class="capability-card reveal">
-          <div class="cap-icon cap-blue">↻</div>
-          <div class="cap-meta">BOUNDED RECOVERY CAMPAIGNS</div>
-          <h3>Run controlled variants—not infinite guesses.</h3>
-          <p>Enforce trial, time, GPU, file-change, and parameter budgets. Require approval before code, dependency, or dataset changes.</p>
-        </article>
-
-        <article class="capability-card reveal">
-          <div class="cap-icon cap-cyan">✓</div>
-          <div class="cap-meta">DETERMINISTIC EVALUATION</div>
-          <h3>Let code decide whether a trial worked.</h3>
-          <p>Judge every intervention against explicit metrics and constraints. The LLM proposes; the evaluator verifies.</p>
-        </article>
-
-        <article class="capability-card reveal">
-          <div class="cap-icon cap-pink">⎇</div>
-          <div class="cap-meta">RESOLUTION MEMORY</div>
-          <h3>Remember fixes that survived reality.</h3>
-          <p>Build a graph of failure signatures, evidence, interventions, and measured outcomes so future campaigns start from verified experience.</p>
-        </article>
+  <div class="shell capability-grid">
+    <article class="capability-card feature-card reveal">
+      <div class="cap-icon cap-green">⌁</div>
+      <div class="cap-meta">FAILURE CAPSULE SCHEMA 1.0</div>
+      <h3>Preserve a CUDA OOM as structured evidence.</h3>
+      <p>Capture locally without a hosted account, network call, or model. Every missing evidence category remains visible instead of being filled with generated claims.</p>
+      <div class="mini-forensic">
+        <div><span>Failure class</span><b>cuda_out_of_memory</b></div>
+        <div><span>Last logged step</span><b>417</b></div>
+        <div><span>Completeness</span><b>8 / 10</b></div>
       </div>
-    </section>
+    </article>
 
-    <section class="section campaign-section">
-      <div class="shell campaign-card reveal">
-        <div class="campaign-copy">
-          <div class="section-kicker">DEFINE SUCCESS BEFORE RECOVERY LOOP</div>
-          <h2>Every campaign runs against a strict contract.</h2>
-          <p>Set a primary metric, operational constraints, permissions, and a hard budget. WatcherML stops when the goal is met, the budget is exhausted, or human approval is required.</p>
-          <ul class="check-list">
-            <li>Explicit metric and acceptance threshold</li>
-            <li>Maximum trials, GPU-hours, and wall time</li>
-            <li>Allowlisted configuration and code changes</li>
-            <li>Automatic rollback and complete audit trail</li>
-          </ul>
-        </div>
-        <div class="contract-editor" aria-label="Example WatcherML campaign contract">
-          <div class="editor-bar"><span>campaign.yaml</span><span>● valid</span></div>
-          <pre><code><span class="yaml-key">objective:</span>
-  <span class="yaml-key">metric:</span> validation_f1
-  <span class="yaml-key">direction:</span> maximize
+    <article class="capability-card reveal">
+      <div class="cap-icon cap-purple">⌕</div>
+      <div class="cap-meta">NEAREST-SUCCESS DIFF</div>
+      <h3>Compare with a relevant success—not merely the latest run.</h3>
+      <p>Use model/configuration, dataset fingerprint, hardware, Git state, framework environment, and recency to select a stronger baseline and expose failure-relevant differences.</p>
+    </article>
 
-<span class="yaml-key">acceptance:</span>
-  <span class="yaml-key">validation_f1:</span> <span class="yaml-value">0.92</span>
-  <span class="yaml-key">peak_vram_gb:</span> <span class="yaml-value">14.5</span>
+    <article class="capability-card reveal">
+      <div class="cap-icon cap-orange">◇</div>
+      <div class="cap-meta">BOUNDED INTERVENTION POLICY</div>
+      <h3>Propose one explainable OOM intervention at a time.</h3>
+      <p>Choose only from an explicit allowlist such as batch size, gradient accumulation, or gradient checkpointing. Each proposal records its evidence, rationale, and expected effect.</p>
+    </article>
+
+    <article class="capability-card reveal">
+      <div class="cap-icon cap-blue">↻</div>
+      <div class="cap-meta">FRESH-PROCESS TRIALS</div>
+      <h3>Test recovery without contaminating the source run.</h3>
+      <p>Launch every variant in a new process with a declared entrypoint and serialized configuration. Capture its exit code, timeout, metrics, resources, and failure capsule independently.</p>
+    </article>
+
+    <article class="capability-card reveal">
+      <div class="cap-icon cap-cyan">✓</div>
+      <div class="cap-meta">CONTRACT VERIFICATION</div>
+      <h3>Prove more than “the process did not crash.”</h3>
+      <p>Require the trial to avoid OOM, reach a minimum step, respect memory and metric-regression limits, and survive confirmation runs before WatcherML calls it recovered.</p>
+    </article>
+
+    <article class="capability-card reveal">
+      <div class="cap-icon cap-pink">⎇</div>
+      <div class="cap-meta">RECOVERY RECORD</div>
+      <h3>Remember only interventions that passed verification.</h3>
+      <p>Store the source capsule, proposed patch, isolated-trial outcome, verifier results, and confirmation evidence as an auditable campaign—not as an opaque “best run.”</p>
+    </article>
+  </div>
+</section>
+
+<section class="section campaign-section" id="recovery-contract">
+  <div class="shell campaign-card reveal">
+    <div class="campaign-copy">
+      <div class="section-kicker">DEFINE RECOVERY BEFORE RUNNING TRIALS</div>
+      <h2>Every campaign begins with a strict contract.</h2>
+      <p>WatcherML does not search for a better hyperparameter score. It tests whether a bounded intervention resolves the captured OOM while preserving declared training behavior.</p>
+      <ul class="check-list">
+        <li>Explicit training entrypoint and source configuration</li>
+        <li>Allowlisted, config-only interventions for v1</li>
+        <li>Maximum trials, timeout, and wall-clock budget</li>
+        <li>Minimum progress, metric-regression limit, and confirmation runs</li>
+        <li>Fresh process and complete evidence for every attempted trial</li>
+      </ul>
+    </div>
+    <div class="contract-editor" aria-label="Example WatcherML OOM recovery contract">
+      <div class="editor-bar"><span>oom-recovery.yaml</span><span>● explicit</span></div>
+      <pre><code><span class="yaml-key">source:</span>
+  <span class="yaml-key">run_id:</span> mistral-lora-7f21
+  <span class="yaml-key">failure_class:</span> cuda_out_of_memory
+
+<span class="yaml-key">entrypoint:</span>
+  <span class="yaml-key">callable:</span> train:main
+  <span class="yaml-key">config:</span> config.json
+
+<span class="yaml-key">verify:</span>
+  <span class="yaml-key">min_steps:</span> <span class="yaml-value">500</span>
+  <span class="yaml-key">confirmation_runs:</span> <span class="yaml-value">2</span>
+  <span class="yaml-key">metric:</span> validation_loss
+  <span class="yaml-key">max_regression:</span> <span class="yaml-value">0.01</span>
 
 <span class="yaml-key">budget:</span>
-  <span class="yaml-key">max_trials:</span> <span class="yaml-value">8</span>
-  <span class="yaml-key">max_gpu_hours:</span> <span class="yaml-value">5</span>
+  <span class="yaml-key">max_trials:</span> <span class="yaml-value">6</span>
+  <span class="yaml-key">trial_timeout_minutes:</span> <span class="yaml-value">30</span>
+  <span class="yaml-key">max_wall_minutes:</span> <span class="yaml-value">90</span>
 
-<span class="yaml-key">permissions:</span>
-  <span class="yaml-key">config:</span> automatic
-  <span class="yaml-key">code:</span> approval_required
-  <span class="yaml-key">dataset:</span> forbidden</code></pre>
-        </div>
+<span class="yaml-key">allow:</span>
+  <span class="yaml-key">config_keys:</span>
+    - batch_size
+    - gradient_accumulation_steps
+    - gradient_checkpointing</code></pre>
+    </div>
+  </div>
+</section>
+
+<section class="section code-section" id="quickstart">
+  <div class="shell code-layout">
+    <div class="code-copy reveal">
+      <div class="section-kicker">LOCAL-FIRST SDK + CLI</div>
+      <h2>One context manager for scripts, Jupyter, and Google Colab.</h2>
+      <p>The core recorder and CLI work without the web UI. In Colab, inspect and export from Python or shell commands; install the optional UI only on a machine where a local browser server makes sense.</p>
+      <div class="install-note"><span>Available through pip</span><small>No hosted service, Ollama process, or LLM dependency is required.</small></div>
+    </div>
+    <div class="code-window reveal">
+      <div class="code-tabs" role="tablist" aria-label="WatcherML SDK and CLI examples">
+        <button class="code-tab active" type="button" data-code-tab="python">Python</button>
+        <button class="code-tab" type="button" data-code-tab="cli">CLI / Colab</button>
+        <button class="copy-button" type="button" data-copy-code aria-label="Copy code">Copy</button>
       </div>
-    </section>
+      <pre class="code-block active" data-code-panel="python"><code><span class="token-key">import</span> watcherml <span class="token-key">as</span> watcher
 
-    <section class="section architecture-section" id="architecture">
-      <div class="section-heading centered"><span class="kicker">FOCUSED BY DESIGN</span>
-        <h2>A recovery layer—not another platform rewrite.</h2><p>Use WatcherML by itself for local experiments, or connect it to the tracking system your team already trusts.</p>
-      </div><div class="architecture"><div class="arch-sources"><span>PyTorch training</span><span>Jupyter notebooks</span><span>MLflow / W&amp;B</span></div><div class="down-arrow">runtime events ↓</div>
-        <div class="arch-core"><div class="core-title"><span class="brand-mark small">W</span><div><b>WatcherML</b><small>local reliability runtime</small></div></div><div class="core-grid"><div>
-          <b>Recorder</b><small>runs · metrics · environment</small></div><div><b>Forensics</b><small>capsules · evidence · diffs</small></div><div><b>Policy engine</b><small>actions · budgets · approvals
-          </small></div><div><b>Trial runner</b><small>fresh isolated processes</small></div><div><b>Verifier</b><small>runtime · metrics · constraints</small></div><div><b>Resolution memory</b>
-            <small>verified outcomes only</small></div></div></div><div class="arch-optional"><span><b>any-llm</b><small>optional planning and explanation</small></span><span><b>MLflow sink</b>
-              <small>optional campaign export</small></span><span><b>W&amp;B sink</b><small>optional campaign export</small></span></div></div></section>
-
-    <section class="section code-section">
-      <div class="shell code-layout">
-        <div class="code-copy reveal">
-          <div class="section-kicker">DESIGNED FOR THE TRAINING LOOP</div>
-          <h2>Start with a small API. Unlock the full forensic loop.</h2>
-          <p>WatcherML is your recovery layer powered even better with any LLM of your choice.</p>
-          <div class="install-note"><span>Available through pip</span><small>Install the lean core, then add notebook and local UI extras only when needed.</small></div>
-        </div>
-        <div class="code-window reveal">
-          <div class="code-tabs" role="tablist" aria-label="WatcherML code examples">
-            <button class="code-tab active" type="button" data-code-tab="python">Python</button>
-            <button class="code-tab" type="button" data-code-tab="cli">CLI</button>
-            <button class="copy-button" type="button" data-copy-code aria-label="Copy code">Copy</button>
-          </div>
-          <pre class="code-block active" data-code-panel="python"><code><span class="token-key">import</span> watcherml <span class="token-key">as</span> watcher
-
-<span class="token-key">with</span> watcher.run(
+<span class="token-key">with</span> watcher.init(
     project=<span class="token-string">"mistral-lora"</span>,
     config=config,
-    export_to=<span class="token-string">"mlflow"</span>,
 ) <span class="token-key">as</span> run:
-    train(model, dataset, run=run)
+    <span class="token-key">for</span> step, batch <span class="token-key">in</span> enumerate(loader):
+        loss = train_step(model, batch)
+        run.log({<span class="token-string">"loss"</span>: loss}, step=step)
 
-<span class="token-comment"># On failure: evidence is frozen automatically.</span>
-<span class="token-comment"># Start a bounded recovery campaign.</span>
-watcher.autopilot(
-    run_id=run.id,
-    contract=<span class="token-string">"campaign.yaml"</span>,
-    agent=<span class="token-string">"ollama/qwen3"</span>,
-)</code></pre>
-          <pre class="code-block" data-code-panel="cli"><code><span class="token-comment"># Initialize local metadata and artifacts</span>
+<span class="token-comment"># On failure, the original exception still propagates.</span>
+<span class="token-comment"># WatcherML has already persisted the deterministic capsule.</span></code></pre>
+      <pre class="code-block" data-code-panel="cli"><code><span class="token-key">pip install</span> watcherml
+
+<span class="token-comment"># Local terminal—or prefix commands with ! in Colab</span>
 <span class="token-key">watcher</span> init
-
-<span class="token-comment"># Find and investigate a failed run</span>
 <span class="token-key">watcher</span> runs --project mistral-lora
-<span class="token-key">watcher</span> inspect run_7f21 --advise
+<span class="token-key">watcher</span> failures --project mistral-lora
+<span class="token-key">watcher</span> inspect RUN_ID
+<span class="token-key">watcher</span> compare FAILED_RUN SUCCESSFUL_RUN
+<span class="token-key">watcher</span> export RUN_ID --out failure-capsule.zip
 
-<span class="token-comment"># Compare evidence and export a reproduction capsule</span>
-<span class="token-key">watcher</span> compare run_7f21 run_8a03 --advise
-<span class="token-key">watcher</span> export run_7f21 --format capsule --out recovery.zip
-
-<span class="token-comment"># Open the local interface</span>
+<span class="token-comment"># Optional local interface; not required in Colab</span>
+<span class="token-key">pip install</span> <span class="token-string">'watcherml[ui]'</span>
 <span class="token-key">watcher</span> ui --port 7331</code></pre>
-        </div>
-      </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section class="section safety-section" id="safety">
-      <div class="shell safety-grid">
-        <div class="safety-copy reveal">
-          <div class="section-kicker">SAFE BY CONSTRUCTION</div>
-          <h2>WatcherML never gets a blank check.</h2>
-          <p>Autonomy without guardrails is just expensive uncertainty. WatcherML constrains what can change, where code can run, and when a human must approve the next step.</p>
-          <a class="inline-arrow" href="#early-access">Read the design principles <span>→</span></a>
-        </div>
-        <div class="guardrail-grid reveal">
-          <div><span>01</span><b>No open shell</b><small>Structured, allowlisted actions instead of arbitrary commands.</small></div>
-          <div><span>02</span><b>Hard budgets</b><small>Limits for GPU-hours, wall time, trials, disk, and memory.</small></div>
-          <div><span>03</span><b>Human gates</b><small>Approval before code, dependency, or dataset changes.</small></div>
-          <div><span>04</span><b>Private defaults</b><small>Local inference and redacted forensic evidence.</small></div>
-          <div><span>05</span><b>Deterministic verdicts</b><small>Metrics and tests—not the LLM—decide success.</small></div>
-        </div>
-      </div>
-    </section>
+<section class="section safety-section" id="safety">
+  <div class="shell safety-grid">
+    <div class="safety-copy reveal">
+      <div class="section-kicker">CONTROLLED BY CONSTRUCTION</div>
+      <h2>A recovery trial is evidence—not a guess.</h2>
+      <p>WatcherML v1 cannot rewrite training code, install dependencies, alter datasets, or silently keep searching. It applies an allowed configuration patch in a fresh process and records exactly what happened.</p>
+      <a class="inline-arrow" href="#recovery-contract">See the recovery contract <span>→</span></a>
+    </div>
+    <div class="guardrail-grid reveal">
+      <div><span>01</span><b>Fresh processes</b><small>Each trial receives a clean interpreter and an independent evidence record.</small></div>
+      <div><span>02</span><b>Source run preserved</b><small>The failed run and its capsule are immutable campaign inputs.</small></div>
+      <div><span>03</span><b>Allowlisted patches</b><small>V1 changes declared configuration keys—not code, packages, or data.</small></div>
+      <div><span>04</span><b>Hard stop conditions</b><small>Trial count, timeout, and wall-clock limits end the campaign predictably.</small></div>
+      <div><span>05</span><b>Deterministic verdicts</b><small>Progress, resource, metric, and confirmation checks decide recovery.</small></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  const root = document.querySelector("#workflow");
+  if (!root || root.dataset.v1WorkflowBound === "true") return;
+  root.dataset.v1WorkflowBound = "true";
+
+  const stages = {
+    capture: {
+      number: "01",
+      title: "Capture the evidence that actually existed at failure.",
+      description: "Persist a versioned capsule with the traceback, configuration, last logged step, recent metrics, sampled resources, environment fingerprint, Git state, dataset fingerprint, and optional CUDA allocator bytes.",
+      tags: ["schema 1.0", "traceback", "allocator state", "capture score"],
+      code: [
+        'capsule.schema.version = "1.0"',
+        'capsule.failure.class = "cuda_out_of_memory"',
+        "capsule.evidence.training_state.last_logged_step = 417",
+        "capsule.capture = { score: 8, maximum: 10 }"
+      ]
+    },
+    classify: {
+      number: "02",
+      title: "Classify the OOM with a deterministic rule.",
+      description: "Match the exception type and CUDA OOM message pattern in code. The classification cites stable evidence IDs and never depends on an LLM, a hosted API, or generated confidence.",
+      tags: ["rule version 1.0", "evidence IDs", "no network", "no model"],
+      code: [
+        'capsule.failure.classification.rule = "cuda_out_of_memory"',
+        'capsule.failure.classification.match_kind = "deterministic"',
+        "capsule.failure.classification.recoverable_by_bounded_trial = true",
+        'capsule.failure.classification.evidence_ids = ["EV-1", "EV-2", "EV-6"]'
+      ]
+    },
+    propose: {
+      number: "03",
+      title: "Propose one bounded intervention from an allowlist.",
+      description: "Use captured batch, accumulation, checkpointing, progress, and memory evidence to select one reversible configuration patch. Record why it was chosen before spending compute.",
+      tags: ["one change", "config only", "reversible", "auditable rationale"],
+      code: [
+        'proposal.key = "batch_size"',
+        "proposal.before = 32",
+        "proposal.after = 16",
+        'proposal.expected_effect = "lower activation memory"'
+      ]
+    },
+    trial: {
+      number: "04",
+      title: "Run the intervention in a fresh isolated process.",
+      description: "Invoke the declared training entrypoint with a serialized patched configuration. The parent process enforces the timeout and records stdout/stderr references, exit status, metrics, resources, and any new capsule.",
+      tags: ["fresh interpreter", "explicit entrypoint", "timeout", "source untouched"],
+      code: [
+        'trial.process = "fresh"',
+        'trial.entrypoint = "train:main"',
+        "trial.patch = { batch_size: 16 }",
+        'trial.outcome = "completed"'
+      ]
+    },
+    verify: {
+      number: "05",
+      title: "Verify recovery against the contract, then remember it.",
+      description: "Require no OOM, minimum training progress, acceptable resource use, bounded metric regression, and confirmation runs. Only verified outcomes enter recovery memory.",
+      tags: ["minimum steps", "metric guard", "confirmation runs", "verified memory"],
+      code: [
+        "verdict.no_oom = true",
+        "verdict.steps_reached = 500",
+        "verdict.metric_regression <= 0.01",
+        'campaign.status = "verified_recovery"'
+      ]
+    }
+  };
+
+  const tabs = [...root.querySelectorAll("[data-workflow-tab]")];
+  const panel = root.querySelector("[data-workflow-stage]");
+  const stageId = root.querySelector("[data-stage-id]");
+  const number = root.querySelector("[data-stage-number]");
+  const title = root.querySelector("[data-stage-title]");
+  const description = root.querySelector("[data-stage-description]");
+  const tags = root.querySelector("[data-stage-tags]");
+  const code = root.querySelector("[data-stage-code]");
+
+  function selectStage(tab, event) {
+    if (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+    const key = tab.dataset.workflowTab;
+    const stage = stages[key];
+    if (!stage) return;
+
+    tabs.forEach((item) => {
+      const active = item === tab;
+      item.classList.toggle("active", active);
+      item.setAttribute("aria-selected", String(active));
+    });
+    panel.setAttribute("aria-labelledby", tab.id);
+    stageId.textContent = key;
+    number.textContent = stage.number;
+    title.textContent = stage.title;
+    description.textContent = stage.description;
+
+    tags.replaceChildren(...stage.tags.map((label) => {
+      const tag = document.createElement("span");
+      tag.textContent = label;
+      return tag;
+    }));
+
+    code.replaceChildren(...stage.code.map((source, index) => {
+      const line = document.createElement("div");
+      line.className = "code-line";
+      const lineNumber = document.createElement("span");
+      lineNumber.className = "line-no";
+      lineNumber.textContent = String(index + 1);
+      const codeText = document.createElement("code");
+      codeText.textContent = source;
+      line.append(lineNumber, codeText);
+      return line;
+    }));
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", (event) => selectStage(tab, event), true);
+    tab.addEventListener("keydown", (event) => {
+      if (!["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft"].includes(event.key)) return;
+      event.preventDefault();
+      const direction = ["ArrowDown", "ArrowRight"].includes(event.key) ? 1 : -1;
+      const next = tabs[(tabs.indexOf(tab) + direction + tabs.length) % tabs.length];
+      next.focus();
+      selectStage(next, event);
+    }, true);
+  });
+})();
+</script>
 
     <section class="section build-section">
       <div class="shell center-heading reveal">
@@ -1141,12 +1265,12 @@ watcher.autopilot(
         <p>Open-source recovery layer for ML experiments.</p>
       </div>
       <div class="footer-links">
-        <div><b>Project</b><a href="#capabilities">Capabilities</a><a href="#workflow">Recovery loop</a><a href="#architecture">Architecture</a></div>
+        <div><b>Project</b><a href="#capabilities">Capabilities</a><a href="#workflow">Recovery loop</a>
         <div><b>Resources</b><a href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">GitHub</a><a href="#early-access">Roadmap</a><a href="#safety">Safety</a></div>
       </div>
     </div>
     <div class="shell footer-bottom">
-      <span>© <span data-year></span> WatcherML. Open-source. </span>
+      <span>© <span data-year></span> WatcherML. Open-source. Made by Rohan Marar </span>
     </div>
   </footer>
 
