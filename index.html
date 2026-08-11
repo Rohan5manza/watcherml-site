@@ -575,98 +575,262 @@
             </div>
           </div>
 
-          <div class="launcher-viewport" data-launcher-viewport tabindex="0" aria-roledescription="carousel">
-            <div class="launcher-track" data-launcher-track>
-              <article class="launcher-slide" aria-label="1 of 4: Core installation">
-                <div>
-                  <span class="launcher-kicker">Core recorder</span>
-                  <h3>Install the full local foundation.</h3>
-                  <p>Get the SDK, CLI, failure capsules, and recovery —without the notebook extension or web UI.</p>
-                  <div class="launcher-meta"><span>local-first</span><span>SDK + CLI</span><span>no web UI</span></div>
-                </div>
-                <div class="launcher-terminal">
-                  <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>terminal</span></div>
-                  <pre><code><span class="cmd">pip install</span> watcherml</code></pre>
-                  <button class="launcher-copy" type="button" data-copy-text="pip install watcherml">Copy</button>
-                </div>
-              </article>
+         <div
+  class="launcher-viewport"
+  data-launcher-viewport
+  tabindex="0"
+  aria-roledescription="carousel"
+>
+  <div class="launcher-track" data-launcher-track>
 
-              <article class="launcher-slide" aria-label="2 of 4: Optional integrations">
-                <div>
-                  <span class="launcher-kicker">Choose your surface</span>
-                  <h3>Add notebooks, the local UI, or both.</h3>
-                  <p>Keep the core lean, then install only the integrations that match how you work.</p>
-                  <div class="launcher-meta"><span>%load_ext watcherml</span><span>watcher ui</span><span>optional extras</span></div>
-                </div>
-                <div class="launcher-terminal">
-                  <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>extras</span></div>
-                  <pre><code><span class="comment"># Jupyter / IPython</span>
-<span class="cmd">pip install</span> watcherml[notebook]
+    <!-- Slide 1: Core installation -->
+    <article
+      class="launcher-slide"
+      aria-label="1 of 4: Core installation"
+    >
+      <div>
+        <span class="launcher-kicker">Core SDK</span>
+
+        <h3>Install deterministic OOM forensics.</h3>
+
+        <p>
+          Get the recorder, CLI, failure capsules, bounded recovery
+          policy, and isolated trial runner—without installing the
+          notebook extension or web UI.
+        </p>
+
+        <div class="launcher-meta">
+          <span>local-first</span>
+          <span>SDK + CLI</span>
+          <span>Python 3.10+</span>
+        </div>
+      </div>
+
+      <div class="launcher-terminal">
+        <div class="launcher-terminal-bar">
+          <i></i><i></i><i></i>
+          <span>terminal</span>
+        </div>
+
+        <pre><code><span class="cmd">pip install</span> watcherml</code></pre>
+
+        <button
+          class="launcher-copy"
+          type="button"
+          data-copy-text="pip install watcherml"
+        >
+          Copy
+        </button>
+      </div>
+    </article>
+
+    <!-- Slide 2: Optional integrations -->
+    <article
+      class="launcher-slide"
+      aria-label="2 of 4: Optional integrations"
+    >
+      <div>
+        <span class="launcher-kicker">Choose your surface</span>
+
+        <h3>Add notebooks, the local UI, or both.</h3>
+
+        <p>
+          Keep the core package lean. Add notebook support for Jupyter
+          and Colab, or install the optional local web interface for
+          desktop workflows.
+        </p>
+
+        <div class="launcher-meta">
+          <span>Jupyter + Colab</span>
+          <span>optional local UI</span>
+          <span>CLI always available</span>
+        </div>
+      </div>
+
+      <div class="launcher-terminal">
+        <div class="launcher-terminal-bar">
+          <i></i><i></i><i></i>
+          <span>optional extras</span>
+        </div>
+
+        <pre><code><span class="comment"># Jupyter, IPython, or Colab</span>
+<span class="cmd">pip install</span> "watcherml[notebook]"
 
 <span class="comment"># Local web UI</span>
-<span class="cmd">pip install</span> watcherml[ui]
+<span class="cmd">pip install</span> "watcherml[ui]"
 
-<span class="comment"># Everything</span>
-<span class="cmd">pip install</span> watcherml[notebook,ui]</code></pre>
-                  <button class="launcher-copy" type="button" data-copy-text="pip install watcherml[notebook,ui]">Copy all</button>
-                </div>
-              </article>
+<span class="comment"># Install both</span>
+<span class="cmd">pip install</span> "watcherml[notebook,ui]"</code></pre>
 
-              <article class="launcher-slide" aria-label="3 of 4: Python SDK example">
-                <div>
-                  <span class="launcher-kicker">Python SDK</span>
-                  <h3>Wrap the training loop. Preserve the evidence.</h3>
-                  <p>Record configuration and run context with a small API, then let WatcherML freeze forensic evidence when execution fails.</p>
-                  <div class="launcher-meta"><span>context manager</span><span>run metadata</span><span>failure capsule</span></div>
-                </div>
-                <div class="launcher-terminal">
-                  <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>train.py</span></div>
-                  <pre><code><span class="flag">import</span> watcherml <span class="flag">as</span> watcher
+        <button
+          class="launcher-copy"
+          type="button"
+          data-copy-text="pip install &quot;watcherml[notebook]&quot;&#10;pip install &quot;watcherml[ui]&quot;&#10;pip install &quot;watcherml[notebook,ui]&quot;"
+        >
+          Copy all
+        </button>
+      </div>
+    </article>
 
-<span class="flag">with</span> watcher.run(
+    <!-- Slide 3: Python SDK -->
+    <article
+      class="launcher-slide"
+      aria-label="3 of 4: Python SDK example"
+    >
+      <div>
+        <span class="launcher-kicker">Python SDK</span>
+
+        <h3>Wrap the run. Preserve the evidence.</h3>
+
+        <p>
+          Record configuration, metrics, environment, dataset identity,
+          and runtime telemetry. If training fails, WatcherML freezes the
+          evidence into a deterministic failure capsule.
+        </p>
+
+        <div class="launcher-meta">
+          <span>small API</span>
+          <span>runtime evidence</span>
+          <span>OOM capsule</span>
+        </div>
+      </div>
+
+      <div class="launcher-terminal">
+        <div class="launcher-terminal-bar">
+          <i></i><i></i><i></i>
+          <span>train.py</span>
+        </div>
+
+        <pre><code><span class="flag">import</span> watcherml <span class="flag">as</span> watcher
+
+<span class="flag">with</span> watcher.init(
     project=<span class="string">"mistral-lora"</span>,
     config=config,
 ) <span class="flag">as</span> run:
-    train(model, dataset, run=run)</code></pre>
-                  <button class="launcher-copy" type="button" data-copy-text="import watcherml as watcher\n\nwith watcher.run(\n    project=\"mistral-lora\",\n    config=config,\n) as run:\n    train(model, dataset, run=run)">Copy</button>
-                </div>
-              </article>
+    train(
+        model,
+        dataset,
+        run=run,
+    )</code></pre>
 
-              <article class="launcher-slide" aria-label="4 of 4: WatcherML CLI example">
-                <div>
-                  <span class="launcher-kicker">Forensics from the terminal</span>
-                  <h3>Inspect, compare, explain, and export.</h3>
-                  <p>Move from a failed run to an auditable diagnosis without leaving your local development workflow.</p>
-                  <div class="launcher-command-cloud" aria-label="Available CLI commands">
-                    <span>init</span><span>runs</span><span>inspect</span><span>failures</span><span>compare</span><span>advise</span><span>export</span><span>recoveries</span><span>recovery</span><span>ui</span>
-                  </div>
-                </div>
-                <div class="launcher-terminal">
-                  <div class="launcher-terminal-bar"><i></i><i></i><i></i><span>watcher CLI</span></div>
-                  <pre><code><span class="cmd">watcher</span> init
-<span class="cmd">watcher</span> runs <span class="flag">--project</span> mistral-lora
-<span class="cmd">watcher</span> inspect RUN_ID <span class="flag">--advise</span>
-<span class="cmd">watcher</span> compare RUN_A RUN_B <span class="flag">--advise</span>
-<span class="cmd">watcher</span> export RUN_ID <span class="flag">--format</span> capsule
-<span class="cmd">watcher</span> ui <span class="flag">--port</span> 7331</code></pre>
-                  <button class="launcher-copy" type="button" data-copy-text="watcher init\nwatcher runs --project mistral-lora\nwatcher inspect RUN_ID --advise\nwatcher compare RUN_A RUN_B --advise\nwatcher export RUN_ID --format capsule\nwatcher ui --port 7331">Copy</button>
-                </div>
-              </article>
-            </div>
-          </div>
+        <button
+          class="launcher-copy"
+          type="button"
+          data-copy-text="import watcherml as watcher&#10;&#10;with watcher.init(&#10;    project=&quot;mistral-lora&quot;,&#10;    config=config,&#10;) as run:&#10;    train(&#10;        model,&#10;        dataset,&#10;        run=run,&#10;    )"
+        >
+          Copy
+        </button>
+      </div>
+    </article>
 
-          <div class="launcher-footer">
-            <div class="launcher-dots" role="tablist" aria-label="Select install or SDK example">
-              <button class="launcher-dot is-active" type="button" data-launcher-dot="0" aria-label="Show core installation" aria-selected="true"></button>
-              <button class="launcher-dot" type="button" data-launcher-dot="1" aria-label="Show optional integrations" aria-selected="false"></button>
-              <button class="launcher-dot" type="button" data-launcher-dot="2" aria-label="Show Python SDK example" aria-selected="false"></button>
-              <button class="launcher-dot" type="button" data-launcher-dot="3" aria-label="Show CLI example" aria-selected="false"></button>
-            </div>
-          </div>
+    <!-- Slide 4: Controlled recovery -->
+    <article
+      class="launcher-slide"
+      aria-label="4 of 4: Controlled OOM recovery"
+    >
+      <div>
+        <span class="launcher-kicker">
+          Controlled OOM recovery
+        </span>
+
+        <h3>Rerun, intervene, and verify.</h3>
+
+        <p>
+          Reproduce the original OOM as a control, evaluate bounded
+          interventions in fresh processes, and require confirmation
+          before any recovery is marked verified.
+        </p>
+
+        <div
+          class="launcher-command-cloud"
+          aria-label="Available WatcherML CLI commands"
+        >
+          <span>init</span>
+          <span>runs</span>
+          <span>inspect</span>
+          <span>failures</span>
+          <span>compare</span>
+          <span>export</span>
+          <span>recover</span>
+          <span>recoveries</span>
+          <span>recovery</span>
+          <span>ui</span>
         </div>
       </div>
+
+      <div class="launcher-terminal">
+        <div class="launcher-terminal-bar">
+          <i></i><i></i><i></i>
+          <span>watcher CLI</span>
+        </div>
+
+        <pre><code><span class="comment"># Inspect the captured OOM</span>
+<span class="cmd">watcher</span> inspect RUN_ID
+
+<span class="comment"># Start isolated controlled trials</span>
+<span class="cmd">watcher</span> recover RUN_ID \
+  --entrypoint train_trial:run \
+  --max-trials 6 \
+  --confirmation-runs 2
+
+<span class="comment"># Inspect the complete campaign</span>
+<span class="cmd">watcher</span> recovery CAMPAIGN_ID
+
+<span class="comment"># Export the original evidence</span>
+<span class="cmd">watcher</span> export RUN_ID</code></pre>
+
+        <button
+          class="launcher-copy"
+          type="button"
+          data-copy-text="watcher inspect RUN_ID&#10;&#10;watcher recover RUN_ID \&#10;  --entrypoint train_trial:run \&#10;  --max-trials 6 \&#10;  --confirmation-runs 2&#10;&#10;watcher recovery CAMPAIGN_ID&#10;watcher export RUN_ID"
+        >
+          Copy
+        </button>
       </div>
-    </section>
+    </article>
+
+  </div>
+</div>
+
+<div class="launcher-footer">
+  <div
+    class="launcher-dots"
+    role="tablist"
+    aria-label="Select installation, SDK, or recovery example"
+  >
+    <button
+      class="launcher-dot is-active"
+      type="button"
+      data-launcher-dot="0"
+      aria-label="Show core installation"
+      aria-selected="true"
+    ></button>
+
+    <button
+      class="launcher-dot"
+      type="button"
+      data-launcher-dot="1"
+      aria-label="Show optional integrations"
+      aria-selected="false"
+    ></button>
+
+    <button
+      class="launcher-dot"
+      type="button"
+      data-launcher-dot="2"
+      aria-label="Show Python SDK example"
+      aria-selected="false"
+    ></button>
+
+    <button
+      class="launcher-dot"
+      type="button"
+      data-launcher-dot="3"
+      aria-label="Show controlled recovery example"
+      aria-selected="false"
+    ></button>
+  </div>
+</div>
 
     <section class="integration-band" aria-label="Technology integrations">
       <div class="shell">
