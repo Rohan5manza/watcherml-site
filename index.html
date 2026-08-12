@@ -834,6 +834,106 @@
       </div>
     </section>
 
+        </section>
+
+    <!-- Why WatcherML exists -->
+    <section class="oom-problem-section" aria-labelledby="oom-problem-title">
+      <div class="shell">
+        <div class="oom-problem-heading reveal">
+          <div>
+            <div class="section-kicker">WHY WATCHERML EXISTS</div>
+            <h2 id="oom-problem-title">
+              The crash is one line.<br />
+              <em>The cost is everything before it.</em>
+            </h2>
+          </div>
+
+          <p>
+            A CUDA out-of-memory error can erase hours or days of training.
+            The process dies, the useful context disappears, and the next step
+            is usually an expensive cycle of changing settings and trying again.
+          </p>
+        </div>
+
+        <div class="oom-problem-layout">
+          <div class="oom-crash-window reveal">
+            <div class="oom-crash-topbar">
+              <div class="window-dots"><span></span><span></span><span></span></div>
+              <span>train_llm.py · failed after 71h 48m</span>
+              <strong>EXIT 1</strong>
+            </div>
+
+            <div class="oom-crash-body">
+              <span class="oom-log-muted">step 48,996 / 50,000</span>
+              <span class="oom-log-muted">running final validation...</span>
+              <span class="oom-log-error">
+                RuntimeError: CUDA out of memory.
+              </span>
+              <span class="oom-log-detail">
+                Tried to allocate 2.00 GiB. GPU 0 has 312 MiB free.
+              </span>
+
+              <div class="oom-crash-divider"></div>
+
+              <p>
+                Training stopped. Which condition caused it—and which change
+                will fix it without damaging training behavior?
+              </p>
+            </div>
+          </div>
+
+          <div class="oom-story-grid">
+            <article class="oom-story reveal">
+              <span class="oom-story-number">01</span>
+              <div>
+                <h3>The late-stage crash</h3>
+                <p>
+                  Training survives for hours, then validation, a longer batch,
+                  or a memory spike pushes VRAM past its limit near the finish.
+                </p>
+              </div>
+            </article>
+
+            <article class="oom-story reveal">
+              <span class="oom-story-number">02</span>
+              <div>
+                <h3>The configuration roulette</h3>
+                <p>
+                  Lower the batch size. Shorten sequences. Enable checkpointing.
+                  Switch precision. Rerun—and hope the failure is actually gone.
+                </p>
+              </div>
+            </article>
+
+            <article class="oom-story reveal">
+              <span class="oom-story-number">03</span>
+              <div>
+                <h3>The missing forensic record</h3>
+                <p>
+                  The exception alone does not preserve the training state,
+                  GPU conditions, configuration, dataset identity, or evidence
+                  needed to reproduce the failure.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="oom-resolution reveal">
+          <span class="oom-resolution-mark">W</span>
+          <p>
+            <strong>WatcherML turns the crash into a controlled investigation.</strong>
+            It captures a versioned failure capsule, proposes bounded
+            interventions, runs isolated trials, and records which recovery
+            actually passed verification.
+          </p>
+          <a href="#workflow">See the recovery loop <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="integration-band" aria-label="Technology integrations">
+
     <section class="integration-band" aria-label="Technology integrations">
       <div class="shell">
         <p>Designed to work with the stack you already use</p>
