@@ -1499,7 +1499,7 @@
       <p>
         Manual retries can make a run pass.
         <strong>
-          WatcherML proves what failed, what changed, and whether the recovery held.
+          WatcherML finds what failed, proposes recovery steps, and executes verified trials.
         </strong>
       </p>
     </blockquote>
@@ -1600,108 +1600,6 @@
   </div>
 </section>
 
-<section class="section capabilities-section" id="capabilities">
-  <div class="shell split-heading reveal">
-    <div>
-      <div class="section-kicker">WATCHERML V1</div>
-      <h2>The complete path from CUDA OOM evidence to verified recovery.</h2>
-    </div>
-    <p>Use WatcherML alongside MLflow, W&amp;B, or your existing tracker. V1 owns the reliability loop they do not: deterministic failure evidence and controlled reruns.</p>
-  </div>
-
-  <div class="shell capability-grid">
-    <article class="capability-card feature-card reveal">
-      <div class="cap-icon cap-green">⌁</div>
-      <div class="cap-meta">FAILURE CAPSULE SCHEMA 1.0</div>
-      <h3>Preserve a CUDA OOM as structured evidence.</h3>
-      <p>Capture locally without a hosted account, network call, or model. Every missing evidence category remains visible instead of being filled with generated claims.</p>
-      <div class="mini-forensic">
-        <div><span>Failure class</span><b>cuda_out_of_memory</b></div>
-        <div><span>Last logged step</span><b>417</b></div>
-        <div><span>Completeness</span><b>8 / 10</b></div>
-      </div>
-    </article>
-
-    <article class="capability-card reveal">
-      <div class="cap-icon cap-purple">⌕</div>
-      <div class="cap-meta">NEAREST-SUCCESS DIFF</div>
-      <h3>Compare with a relevant success—not merely the latest run.</h3>
-      <p>Use model/configuration, dataset fingerprint, hardware, Git state, framework environment, and recency to select a stronger baseline and expose failure-relevant differences.</p>
-    </article>
-
-    <article class="capability-card reveal">
-      <div class="cap-icon cap-orange">◇</div>
-      <div class="cap-meta">BOUNDED INTERVENTION POLICY</div>
-      <h3>Propose one explainable OOM intervention at a time.</h3>
-      <p>Choose only from an explicit allowlist such as batch size, gradient accumulation, or gradient checkpointing. Each proposal records its evidence, rationale, and expected effect.</p>
-    </article>
-
-    <article class="capability-card reveal">
-      <div class="cap-icon cap-blue">↻</div>
-      <div class="cap-meta">FRESH-PROCESS TRIALS</div>
-      <h3>Test recovery without contaminating the source run.</h3>
-      <p>Launch every variant in a new process with a declared entrypoint and serialized configuration. Capture its exit code, timeout, metrics, resources, and failure capsule independently.</p>
-    </article>
-
-    <article class="capability-card reveal">
-      <div class="cap-icon cap-cyan">✓</div>
-      <div class="cap-meta">CONTRACT VERIFICATION</div>
-      <h3>Prove more than “the process did not crash.”</h3>
-      <p>Require the trial to avoid OOM, reach a minimum step, respect memory and metric-regression limits, and survive confirmation runs before WatcherML calls it recovered.</p>
-    </article>
-
-    <article class="capability-card reveal">
-      <div class="cap-icon cap-pink">⎇</div>
-      <div class="cap-meta">RECOVERY RECORD</div>
-      <h3>Remember only interventions that passed verification.</h3>
-      <p>Store the source capsule, proposed patch, isolated-trial outcome, verifier results, and confirmation evidence as an auditable campaign—not as an opaque “best run.”</p>
-    </article>
-  </div>
-</section>
-
-<section class="section campaign-section" id="recovery-contract">
-  <div class="shell campaign-card reveal">
-    <div class="campaign-copy">
-      <div class="section-kicker">DEFINE RECOVERY BEFORE RUNNING TRIALS</div>
-      <h2>Every campaign begins with a strict contract.</h2>
-      <p>WatcherML does not search for a better hyperparameter score. It tests whether a bounded intervention resolves the captured OOM while preserving declared training behavior.</p>
-      <ul class="check-list">
-        <li>Explicit training entrypoint and source configuration</li>
-        <li>Allowlisted, config-only interventions for v1</li>
-        <li>Maximum trials, timeout, and wall-clock budget</li>
-        <li>Minimum progress, metric-regression limit, and confirmation runs</li>
-        <li>Fresh process and complete evidence for every attempted trial</li>
-      </ul>
-    </div>
-    <div class="contract-editor" aria-label="Example WatcherML OOM recovery contract">
-      <div class="editor-bar"><span>oom-recovery.yaml</span><span>● explicit</span></div>
-      <pre><code><span class="yaml-key">source:</span>
-  <span class="yaml-key">run_id:</span> mistral-lora-7f21
-  <span class="yaml-key">failure_class:</span> cuda_out_of_memory
-
-<span class="yaml-key">entrypoint:</span>
-  <span class="yaml-key">callable:</span> train:main
-  <span class="yaml-key">config:</span> config.json
-
-<span class="yaml-key">verify:</span>
-  <span class="yaml-key">min_steps:</span> <span class="yaml-value">500</span>
-  <span class="yaml-key">confirmation_runs:</span> <span class="yaml-value">2</span>
-  <span class="yaml-key">metric:</span> validation_loss
-  <span class="yaml-key">max_regression:</span> <span class="yaml-value">0.01</span>
-
-<span class="yaml-key">budget:</span>
-  <span class="yaml-key">max_trials:</span> <span class="yaml-value">6</span>
-  <span class="yaml-key">trial_timeout_minutes:</span> <span class="yaml-value">30</span>
-  <span class="yaml-key">max_wall_minutes:</span> <span class="yaml-value">90</span>
-
-<span class="yaml-key">allow:</span>
-  <span class="yaml-key">config_keys:</span>
-    - batch_size
-    - gradient_accumulation_steps
-    - gradient_checkpointing</code></pre>
-    </div>
-  </div>
-</section>
 
 <section class="section code-section" id="quickstart">
   <div class="shell code-layout">
