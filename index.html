@@ -836,103 +836,239 @@
 
         </section>
 
-    <!-- Why WatcherML exists -->
-    <section class="oom-problem-section" aria-labelledby="oom-problem-title">
-      <div class="shell">
-        <div class="oom-problem-heading reveal">
-          <div>
-            <div class="section-kicker">WHY WATCHERML EXISTS</div>
-            <h2 id="oom-problem-title">
-              The crash is one line.<br />
-              <em>The cost is everything before it.</em>
-            </h2>
-          </div>
+   <section
+  class="oom-stories"
+  id="oom-stories"
+  aria-labelledby="oom-stories-title"
+  data-oom-carousel
+>
+  <div class="shell">
+    <div class="oom-stories-heading reveal">
+      <div>
+        <div class="section-kicker">WHY WATCHERML EXISTS</div>
+        <h2 id="oom-stories-title">
+          The crash is one line.<br />
+          <em>The cost is everything before it.</em>
+        </h2>
+      </div>
 
-          <p>
-            A CUDA out-of-memory error can erase hours or days of training.
-            The process dies, the useful context disappears, and the next step
-            is usually an expensive cycle of changing settings and trying again.
-          </p>
+      <p>
+        CUDA out-of-memory failures can erase hours or days of GPU training.
+        The exception is obvious. Reconstructing why it happened—and proving
+        which intervention fixes it—is not.
+      </p>
+    </div>
+
+    <div class="oom-carousel reveal">
+      <div class="oom-carousel-bar">
+        <div class="window-dots" aria-hidden="true">
+          <span></span><span></span><span></span>
         </div>
 
-        <div class="oom-problem-layout">
-          <div class="oom-crash-window reveal">
-            <div class="oom-crash-topbar">
-              <div class="window-dots"><span></span><span></span><span></span></div>
-              <span>train_llm.py · failed after 71h 48m</span>
-              <strong>EXIT 1</strong>
-            </div>
+        <span class="oom-carousel-label">CUDA OOM HORROR STORIES</span>
 
-            <div class="oom-crash-body">
-              <span class="oom-log-muted">step 48,996 / 50,000</span>
-              <span class="oom-log-muted">running final validation...</span>
-              <span class="oom-log-error">
-                RuntimeError: CUDA out of memory.
-              </span>
-              <span class="oom-log-detail">
-                Tried to allocate 2.00 GiB. GPU 0 has 312 MiB free.
-              </span>
+        <div class="oom-carousel-controls">
+          <span class="oom-carousel-counter" data-oom-counter>01 / 03</span>
 
-              <div class="oom-crash-divider"></div>
+          <button
+            class="oom-carousel-arrow"
+            type="button"
+            data-oom-prev
+            aria-label="Show previous CUDA OOM scenario"
+          >←</button>
 
-              <p>
-                Training stopped. Which condition caused it—and which change
-                will fix it without damaging training behavior?
-              </p>
-            </div>
-          </div>
-
-          <div class="oom-story-grid">
-            <article class="oom-story reveal">
-              <span class="oom-story-number">01</span>
-              <div>
-                <h3>The late-stage crash</h3>
-                <p>
-                  Training survives for hours, then validation, a longer batch,
-                  or a memory spike pushes VRAM past its limit near the finish.
-                </p>
-              </div>
-            </article>
-
-            <article class="oom-story reveal">
-              <span class="oom-story-number">02</span>
-              <div>
-                <h3>The configuration roulette</h3>
-                <p>
-                  Lower the batch size. Shorten sequences. Enable checkpointing.
-                  Switch precision. Rerun—and hope the failure is actually gone.
-                </p>
-              </div>
-            </article>
-
-            <article class="oom-story reveal">
-              <span class="oom-story-number">03</span>
-              <div>
-                <h3>The missing forensic record</h3>
-                <p>
-                  The exception alone does not preserve the training state,
-                  GPU conditions, configuration, dataset identity, or evidence
-                  needed to reproduce the failure.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <div class="oom-resolution reveal">
-          <span class="oom-resolution-mark">W</span>
-          <p>
-            <strong>WatcherML turns the crash into a controlled investigation.</strong>
-            It captures a versioned failure capsule, proposes bounded
-            interventions, runs isolated trials, and records which recovery
-            actually passed verification.
-          </p>
-          <a href="#workflow">See the recovery loop <span>→</span></a>
+          <button
+            class="oom-carousel-arrow"
+            type="button"
+            data-oom-next
+            aria-label="Show next CUDA OOM scenario"
+          >→</button>
         </div>
       </div>
-    </section>
 
-    <section class="integration-band" aria-label="Technology integrations">
+      <div
+        class="oom-carousel-viewport"
+        data-oom-viewport
+        tabindex="0"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Common CUDA out-of-memory failure scenarios"
+      >
+        <div class="oom-carousel-track" data-oom-track>
+
+          <!-- Story 1 -->
+          <article
+            class="oom-carousel-slide"
+            aria-label="1 of 3: The 99 percent epoch crash"
+          >
+            <div class="oom-terminal">
+              <div class="oom-terminal-title">
+                <span>train_llm.py</span>
+                <strong>FAILED AFTER 71H 48M</strong>
+              </div>
+
+              <div class="oom-terminal-body">
+                <span class="oom-terminal-muted">step 48,996 / 50,000</span>
+                <span class="oom-terminal-muted">running final validation...</span>
+                <span class="oom-terminal-error">
+                  RuntimeError: CUDA out of memory.
+                </span>
+                <span>
+                  Tried to allocate 2.00 GiB. GPU 0 has 312 MiB free.
+                </span>
+              </div>
+            </div>
+
+            <div class="oom-story-copy">
+              <span class="oom-story-tag">THE 99% EPOCH CRASH</span>
+              <h3>Three days of training. One validation batch ends it.</h3>
+              <p>
+                The training loop fits, but validation uses a larger batch or
+                longer sequence. VRAM crosses its limit near the finish and the
+                entire run terminates.
+              </p>
+
+              <ul>
+                <li>Failure appears only in a later training phase</li>
+                <li>The last successful state may not explain the spike</li>
+                <li>Rerunning the full job to test one change is expensive</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Story 2 -->
+          <article
+            class="oom-carousel-slide"
+            aria-label="2 of 3: The long-context fine-tuning trap"
+            aria-hidden="true"
+          >
+            <div class="oom-terminal">
+              <div class="oom-terminal-title">
+                <span>finetune.py</span>
+                <strong>OOM WITH BATCH SIZE 1</strong>
+              </div>
+
+              <div class="oom-terminal-body">
+                <span><b>model</b> = "llm-7b"</span>
+                <span><b>batch_size</b> = 1</span>
+                <span><b>max_length</b> = 4096</span>
+                <span><b>gradient_checkpointing</b> = true</span>
+                <span class="oom-terminal-error">
+                  torch.cuda.OutOfMemoryError
+                </span>
+              </div>
+            </div>
+
+            <div class="oom-story-copy">
+              <span class="oom-story-tag">THE LONG-CONTEXT TRAP</span>
+              <h3>Even the smaller model still runs out of memory.</h3>
+              <p>
+                Batch size is already one. Mixed precision and gradient
+                checkpointing are enabled. But sequence length, activations,
+                optimizer state, and temporary allocations still exceed VRAM.
+              </p>
+
+              <ul>
+                <li>Several memory variables interact at once</li>
+                <li>The obvious intervention may already be exhausted</li>
+                <li>A successful launch does not guarantee stable headroom</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Story 3 -->
+          <article
+            class="oom-carousel-slide"
+            aria-label="3 of 3: The expensive guessing loop"
+            aria-hidden="true"
+          >
+            <div class="oom-terminal">
+              <div class="oom-terminal-title">
+                <span>recovery_notes.txt</span>
+                <strong>ATTEMPT 07</strong>
+              </div>
+
+              <div class="oom-terminal-body">
+                <span class="oom-terminal-muted">✓ lowered batch size</span>
+                <span class="oom-terminal-muted">✓ enabled mixed precision</span>
+                <span class="oom-terminal-muted">✓ shortened sequences</span>
+                <span class="oom-terminal-muted">✓ emptied CUDA cache</span>
+                <span class="oom-terminal-error">
+                  Result: CUDA OOM still reproduced
+                </span>
+              </div>
+            </div>
+
+            <div class="oom-story-copy">
+              <span class="oom-story-tag">CONFIGURATION ROULETTE</span>
+              <h3>Change a setting. Pay for another run. Hope.</h3>
+              <p>
+                Without a preserved failure record and a controlled recovery
+                contract, engineers test loosely related fixes without knowing
+                whether the original failure was reproduced or truly resolved.
+              </p>
+
+              <ul>
+                <li>Trials are difficult to compare reliably</li>
+                <li>Multiple changes obscure which intervention mattered</li>
+                <li>A completed probe can be mistaken for a verified recovery</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="oom-carousel-footer">
+        <div
+          class="oom-carousel-dots"
+          role="tablist"
+          aria-label="Select a CUDA OOM scenario"
+        >
+          <button
+            class="oom-carousel-dot active"
+            type="button"
+            data-oom-dot="0"
+            aria-label="Show the 99 percent epoch crash"
+            aria-selected="true"
+          ></button>
+
+          <button
+            class="oom-carousel-dot"
+            type="button"
+            data-oom-dot="1"
+            aria-label="Show the long-context fine-tuning trap"
+            aria-selected="false"
+          ></button>
+
+          <button
+            class="oom-carousel-dot"
+            type="button"
+            data-oom-dot="2"
+            aria-label="Show the expensive guessing loop"
+            aria-selected="false"
+          ></button>
+        </div>
+
+        <span>Auto-advances · swipe or use arrow keys</span>
+      </div>
+    </div>
+
+    <div class="oom-answer reveal">
+      <span class="oom-answer-mark">W</span>
+
+      <p>
+        <strong>WatcherML turns the crash into a controlled investigation.</strong>
+        It captures a versioned failure capsule, evaluates bounded
+        configuration interventions in fresh processes, and records whether
+        recovery passed its declared verification contract.
+      </p>
+
+      <a href="#workflow">
+        See the recovery loop <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
 
     <section class="integration-band" aria-label="Technology integrations">
       <div class="shell">
