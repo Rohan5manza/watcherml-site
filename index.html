@@ -854,8 +854,8 @@
 
       <p>
         CUDA out-of-memory failures can erase hours or days of GPU training.
-        The exception is obvious. Reconstructing why it happened—and proving
-        which intervention fixes it—is not.
+        The exception is obvious. Reconstructing why it happened, and proving
+        which intervention fixes it, is not.
       </p>
     </div>
 
@@ -1001,7 +1001,7 @@
 
             <div class="oom-story-copy">
               <span class="oom-story-tag">CONFIGURATION ROULETTE</span>
-              <h3>Change a setting. Pay for another run. Hope.</h3>
+              <h3>Change a setting. Pay for another run. Commit risky yolo runs.</h3>
               <p>
                 Without a preserved failure record and a controlled recovery
                 contract, engineers test loosely related fixes without knowing
@@ -1049,7 +1049,6 @@
           ></button>
         </div>
 
-        <span>Auto-advances · swipe or use arrow keys</span>
       </div>
     </div>
 
@@ -1067,6 +1066,444 @@
         See the recovery loop <span>→</span>
       </a>
     </div>
+  </div>
+</section>
+
+    <section
+  class="recovery-value-section"
+  aria-labelledby="recovery-value-title"
+  data-value-carousel
+>
+  <div class="shell">
+    <div class="recovery-value-heading reveal">
+      <div>
+        <div class="section-kicker">WHY NOT JUST RETRY MANUALLY?</div>
+        <h2 id="recovery-value-title">
+          Making a run pass is easy.<br />
+          <em>Proving the recovery is harder.</em>
+        </h2>
+      </div>
+
+      <p>
+        An experienced engineer can reduce a batch size without WatcherML.
+        The value appears when training is expensive, failures recur, multiple
+        engineers are involved, or a successful retry must be trusted later.
+      </p>
+    </div>
+
+    <div class="value-carousel reveal">
+      <div class="value-carousel-topbar">
+        <div class="window-dots" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+
+        <span class="value-carousel-title">
+          THE RECOVERY RECORD
+        </span>
+
+        <div class="value-carousel-controls">
+          <span data-value-counter>01 / 06</span>
+
+          <button
+            type="button"
+            data-value-prev
+            aria-label="Show previous WatcherML benefit"
+          >←</button>
+
+          <button
+            type="button"
+            data-value-next
+            aria-label="Show next WatcherML benefit"
+          >→</button>
+        </div>
+      </div>
+
+      <div
+        class="value-carousel-viewport"
+        data-value-viewport
+        tabindex="0"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Why teams use WatcherML"
+      >
+        <div class="value-carousel-track" data-value-track>
+
+          <!-- 1: Passing versus proving -->
+          <article
+            class="value-slide"
+            aria-label="1 of 6: Passing versus proving"
+          >
+            <div class="value-slide-copy">
+              <span class="value-slide-number">01</span>
+              <span class="value-slide-kicker">PASSING IS NOT PROVING</span>
+
+              <h3>
+                “Batch size 16 worked” leaves the important questions unanswered.
+              </h3>
+
+              <p>
+                Manual recovery can make one run complete. It rarely produces a
+                complete explanation of the incident or evidence that another
+                engineer can inspect and reproduce.
+              </p>
+
+              <div class="cause-cloud" aria-label="Possible CUDA OOM causes">
+                <span>training</span>
+                <span>evaluation</span>
+                <span>fragmentation</span>
+                <span>tensor growth</span>
+                <span>optimizer state</span>
+                <span>GPU contention</span>
+              </div>
+            </div>
+
+            <div class="value-comparison">
+              <div class="manual-result">
+                <span>MANUAL RETRY</span>
+                <code>“Batch size 16 worked.”</code>
+              </div>
+
+              <div class="watcher-result">
+                <span>WATCHERML RECORD</span>
+                <ul>
+                  <li>Original failure and training phase</li>
+                  <li>Captured configuration and environment</li>
+                  <li>Allowlisted intervention</li>
+                  <li>Probe and full-trial results</li>
+                  <li>Quality-regression check</li>
+                  <li>Independent confirmation status</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2: GPU economics -->
+          <article
+            class="value-slide"
+            aria-label="2 of 6: GPU-hour savings"
+            aria-hidden="true"
+          >
+            <div class="value-slide-copy">
+              <span class="value-slide-number">02</span>
+              <span class="value-slide-kicker">CHANGE THE GPU ECONOMICS</span>
+
+              <h3>
+                Reject obvious failures before paying for another complete job.
+              </h3>
+
+              <p>
+                If a full attempt takes eight GPU-hours, three manual retries
+                can consume up to 24 GPU-hours. WatcherML evaluates candidates
+                with bounded probes before promoting a survivor.
+              </p>
+
+              <p class="value-caveat">
+                A probe cannot guarantee that a late-stage OOM is gone—but it
+                can cheaply eliminate candidates that fail immediately.
+              </p>
+            </div>
+
+            <div class="gpu-economics">
+              <div class="gpu-manual">
+                <div class="economics-label">MANUAL RETRIES</div>
+                <strong>24</strong>
+                <span>potential GPU-hours</span>
+
+                <div class="job-row">
+                  <i></i><i></i><i></i>
+                </div>
+
+                <small>3 complete attempts × 8 hours</small>
+              </div>
+
+              <div class="gpu-arrow">→</div>
+
+              <div class="gpu-watcher">
+                <div class="economics-label">BOUNDED CAMPAIGN</div>
+
+                <div class="probe-result failed">
+                  <span>A</span>
+                  <b>OOM at step 6</b>
+                  <small>eliminated</small>
+                </div>
+
+                <div class="probe-result failed">
+                  <span>B</span>
+                  <b>OOM at step 18</b>
+                  <small>eliminated</small>
+                </div>
+
+                <div class="probe-result passed">
+                  <span>C</span>
+                  <b>survived 30 steps</b>
+                  <small>promote to full trial</small>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3: Semantic safeguards -->
+          <article
+            class="value-slide"
+            aria-label="3 of 6: Prevent misleading fixes"
+            aria-hidden="true"
+          >
+            <div class="value-slide-copy">
+              <span class="value-slide-number">03</span>
+              <span class="value-slide-kicker">PRESERVE WORKLOAD MEANING</span>
+
+              <h3>
+                An OOM can disappear because you accidentally changed the experiment.
+              </h3>
+
+              <p>
+                Shortening sequences, dropping examples, disabling validation,
+                reducing training steps, or changing the dataset may make a job
+                pass while invalidating the intended workload.
+              </p>
+            </div>
+
+            <div class="invariant-panel">
+              <div class="invariant-head">
+                <span>recovery-contract.yaml</span>
+                <strong>INVARIANTS ACTIVE</strong>
+              </div>
+
+              <div class="invariant-row">
+                <span>Dataset fingerprint</span>
+                <b>must match</b>
+                <i class="invariant-pass">preserved</i>
+              </div>
+
+              <div class="invariant-row">
+                <span>Effective batch</span>
+                <b>32</b>
+                <i class="invariant-pass">preserved</i>
+              </div>
+
+              <div class="invariant-row">
+                <span>Validation</span>
+                <b>required</b>
+                <i class="invariant-pass">executed</i>
+              </div>
+
+              <div class="invariant-row">
+                <span>Maximum loss regression</span>
+                <b>+0.030</b>
+                <i class="invariant-pass">+0.006</i>
+              </div>
+
+              <div class="invariant-row blocked">
+                <span>Sequence truncation</span>
+                <b>not allowed</b>
+                <i>blocked</i>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4: Isolated execution -->
+          <article
+            class="value-slide"
+            aria-label="4 of 6: Clean isolated trials"
+            aria-hidden="true"
+          >
+            <div class="value-slide-copy">
+              <span class="value-slide-number">04</span>
+              <span class="value-slide-kicker">TRUST THE COMPARISON</span>
+
+              <h3>
+                Every trial starts in a fresh process—not a haunted notebook.
+              </h3>
+
+              <p>
+                Notebook reruns can inherit cached CUDA allocations, old model
+                objects, modified globals, optimizer state, imported modules,
+                and partially executed cells.
+              </p>
+
+              <p>
+                WatcherML rebuilds each candidate in an isolated worker and
+                releases the child CUDA context when the worker exits.
+              </p>
+            </div>
+
+            <div class="process-comparison">
+              <div class="process-column contaminated">
+                <span>NOTEBOOK RETRY</span>
+                <div><i>!</i> Cached allocations</div>
+                <div><i>!</i> Old optimizer state</div>
+                <div><i>!</i> Modified globals</div>
+                <div><i>!</i> Partial cell history</div>
+              </div>
+
+              <div class="process-column isolated">
+                <span>WATCHERML WORKER</span>
+                <div><i>✓</i> Fresh interpreter</div>
+                <div><i>✓</i> Rebuilt model</div>
+                <div><i>✓</i> Declared configuration</div>
+                <div><i>✓</i> Independent run record</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5: Team and unattended value -->
+          <article
+            class="value-slide"
+            aria-label="5 of 6: Team-wide compounding value"
+            aria-hidden="true"
+          >
+            <div class="value-slide-copy">
+              <span class="value-slide-number">05</span>
+              <span class="value-slide-kicker">COMPOUND ACROSS THE TEAM</span>
+
+              <h3>
+                The twentieth engineer should not rediscover the first engineer’s fix.
+              </h3>
+
+              <p>
+                Integration is paid once. Every incident then contributes
+                reusable evidence, contracts, adapters, policies, and comparable
+                intervention outcomes.
+              </p>
+            </div>
+
+            <div class="team-value-panel">
+              <div class="unattended-flow">
+                <span>Capture</span>
+                <i>→</i>
+                <span>Propose</span>
+                <i>→</i>
+                <span>Probe</span>
+                <i>→</i>
+                <span>Eliminate</span>
+                <i>→</i>
+                <span>Full trial</span>
+                <i>→</i>
+                <span>Report</span>
+              </div>
+
+              <div class="team-assets">
+                <div>
+                  <strong>Failure capsules</strong>
+                  <span>Standard incident evidence</span>
+                </div>
+
+                <div>
+                  <strong>Recovery contracts</strong>
+                  <span>Shared safety policy</span>
+                </div>
+
+                <div>
+                  <strong>Framework adapters</strong>
+                  <span>Lower setup cost</span>
+                </div>
+
+                <div>
+                  <strong>Verified recoveries</strong>
+                  <span>Reusable institutional knowledge</span>
+                </div>
+              </div>
+
+              <p>
+                The campaign handles bounded work unattended. The engineer
+                returns to a structured report instead of another crashed run.
+              </p>
+            </div>
+          </article>
+
+          <!-- 6: Progressive adoption -->
+          <article
+            class="value-slide"
+            aria-label="6 of 6: Progressive adoption"
+            aria-hidden="true"
+          >
+            <div class="value-slide-copy">
+              <span class="value-slide-number">06</span>
+              <span class="value-slide-kicker">USE ONLY WHAT YOU NEED</span>
+
+              <h3>
+                Start with evidence. Add GPU recovery only when the incident warrants it.
+              </h3>
+
+              <p>
+                Capturing a failure should require almost no setup. Entrypoints,
+                contracts, probes, full trials, and confirmation are needed only
+                when the user chooses deeper recovery.
+              </p>
+
+              <div class="honest-boundary">
+                <strong>When manual recovery is better</strong>
+                <p>
+                  For a five-minute, one-off experiment with an obvious cause,
+                  changing the batch size manually is probably faster.
+                </p>
+              </div>
+            </div>
+
+            <div class="adoption-levels">
+              <div>
+                <span>01</span>
+                <p><b>Capture</b><small>Deterministic OOM capsule</small></p>
+                <em>Almost zero cost</em>
+              </div>
+
+              <div>
+                <span>02</span>
+                <p><b>Diagnose</b><small>Evidence-backed interventions</small></p>
+                <em>No additional GPU run</em>
+              </div>
+
+              <div>
+                <span>03</span>
+                <p><b>Probe</b><small>Eliminate early failures</small></p>
+                <em>Short GPU runs</em>
+              </div>
+
+              <div>
+                <span>04</span>
+                <p><b>Full trial</b><small>Test complete recovery</small></p>
+                <em>Provisional success</em>
+              </div>
+
+              <div>
+                <span>05</span>
+                <p><b>Confirm</b><small>Repeat independently</small></p>
+                <em>Verified recovery</em>
+              </div>
+
+              <div class="adoption-status">
+                Successful trial — not independently confirmed
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="value-carousel-footer">
+        <div
+          class="value-carousel-dots"
+          role="tablist"
+          aria-label="Select a WatcherML benefit"
+        >
+          <button class="value-carousel-dot active" type="button" data-value-dot="0" aria-label="Passing versus proving" aria-selected="true"></button>
+          <button class="value-carousel-dot" type="button" data-value-dot="1" aria-label="GPU-hour savings" aria-selected="false"></button>
+          <button class="value-carousel-dot" type="button" data-value-dot="2" aria-label="Semantic safeguards" aria-selected="false"></button>
+          <button class="value-carousel-dot" type="button" data-value-dot="3" aria-label="Isolated execution" aria-selected="false"></button>
+          <button class="value-carousel-dot" type="button" data-value-dot="4" aria-label="Team-wide value" aria-selected="false"></button>
+          <button class="value-carousel-dot" type="button" data-value-dot="5" aria-label="Progressive adoption" aria-selected="false"></button>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="value-positioning reveal">
+      <span>THE BOTTOM LINE</span>
+      <p>
+        Manual retries can make a run pass.
+        <strong>
+          WatcherML proves what failed, what changed, and whether the recovery held.
+        </strong>
+      </p>
+    </blockquote>
   </div>
 </section>
 
