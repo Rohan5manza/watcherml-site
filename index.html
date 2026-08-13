@@ -853,9 +853,8 @@
       </div>
 
       <p>
-        CUDA out-of-memory failures can erase hours or days of GPU training.
-        The exception is obvious. Reconstructing why it happened, and proving
-        which intervention fixes it, is not.
+       CUDA Out of Memory (OOM) errors are arguably the most common bottleneck in AI dev.
+       They can erase hours, or even days, of GPU training.
       </p>
     </div>
 
@@ -921,7 +920,7 @@
 
             <div class="oom-story-copy">
               <span class="oom-story-tag">THE 99% EPOCH CRASH</span>
-              <h3>Three days of training. One validation batch ends it.</h3>
+              <h3>Many days of training. One validation batch ends it.</h3>
               <p>
                 The training loop fits, but validation uses a larger batch or
                 longer sequence. VRAM crosses its limit near the finish and the
@@ -1553,7 +1552,7 @@
   <div class="shell center-heading reveal">
     <div class="section-kicker">V1 PROOF VERTICAL · CUDA OOM RECOVERY</div>
     <h2>Turn one CUDA OOM into a controlled recovery experiment.</h2>
-    <p>WatcherML is a local-first reliability layer for ML training—not another experiment-tracking platform. V1 starts with one failure class that can be captured, changed, rerun, and verified without guesswork.</p>
+    <p>WatcherML is a local-first reliability layer for ML training. V1 starts with tackling OOM errors that can be captured, changed, rerun, and verified without guesswork.</p>
   </div>
 
   <div class="shell workflow-layout">
