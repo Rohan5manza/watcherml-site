@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="WatcherML is a local-first Python SDK and CLI for deterministic CUDA OOM forensics, bounded recovery campaigns, and independently verified recoveries." />
+  <meta name="description" content="WatcherML is a local deterministic experiment engineer for PyTorch. It investigates failed and underperforming runs, proposes evidence-backed interventions, executes bounded trials, and verifies what worked." />
   <meta name="theme-color" content="#090b10" />
-  <meta property="og:title" content="WatcherML — From CUDA OOM to verified recovery" />
-  <meta property="og:description" content="Capture deterministic OOM evidence, run bounded candidates in fresh processes, and verify recovery through independent confirmation." />
+  <meta property="og:title" content="WatcherML — Your first recovery and reliability layer for ML experiments" />
+  <meta property="og:description" content="A local-first forensic debugger and experiment engineer for PyTorch." />
   <meta property="og:type" content="website" />
-  <title>WatcherML — Deterministic CUDA OOM recovery</title>
+  <title>WatcherML — Recovery and forensics layer for ML experiments</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
 
@@ -455,9 +455,9 @@
               <span class="pulse-dot"></span>
               Open-source · Local-first
             </div>
-            <h1>From CUDA OOM to <span class="gradient-text">verified recovery</span></h1>
+            <h1>From failed runs to <span class="gradient-text"> verified fix</span></h1>
             <p class="hero-lede">
-              WatcherML is a local-first Python SDK and CLI that captures deterministic OOM evidence, seals allowed changes and compute budgets, runs controlled candidates in fresh subprocesses, and verifies recovery only after independent confirmation.
+             WatcherML is the reliability and recovery layer for ML training. It captures evidence, diagnoses failures, proposes bounded interventions, reruns controlled trials, and proves which change actually worked.
             </p>
 
             <div class="hero-actions">
@@ -853,8 +853,8 @@
       </div>
 
       <p>
-        CUDA out-of-memory errors are a recurring failure mode in GPU training.
-        The exception is brief; the lost compute and uncertain recovery are not.
+        CUDA Out of Memory (OOM) errors are arguably the most common bottleneck in AI dev.
+       They can erase hours, or even days, of GPU training.
       </p>
     </div>
 
@@ -1076,16 +1076,16 @@
   <div class="shell">
     <div class="recovery-value-heading reveal">
       <div>
-        <div class="section-kicker">WHY THE PROTOCOL MATTERS</div>
+        <div class="section-kicker">MASSIVELY IMPROVE YOUR ML WORKFLOWS</div>
         <h2 id="recovery-value-title">
-          Spend GPU-hours on evidence.<br />
-          <em>Not configuration roulette.</em>
+          Strop paying full price.<br />
+          <em>Save your GPU-hours.</em>
         </h2>
       </div>
 
       <p>
-        WatcherML is most useful when training is expensive, failures recur, multiple
-        engineers are involved, or a successful retry must be trusted later.
+       WatcherML assists ML engineers when training is expensive, failures recur, multiple
+        engineers are involved, and successful retries must be trusted later.
       </p>
     </div>
 
@@ -1496,9 +1496,9 @@
     <blockquote class="value-positioning reveal">
       <span>THE BOTTOM LINE</span>
       <p>
-        Manual retries can make one run pass.
+        Manual retries can make one ML run pass.
         <strong>
-          WatcherML preserves the failure, bounds the search, and verifies that the recovery repeats.
+           WatcherML finds what failed, proposes recovery steps, and executes verified trials.
         </strong>
       </p>
     </blockquote>
@@ -1509,11 +1509,11 @@
       <div class="shell">
         <p>Built for the stack you already use</p>
         <div class="logo-row">
-          <span class="integration-ready"><b>PyTorch</b><small>v1 workload</small></span>
-          <span class="integration-ready"><b>Jupyter / Colab</b><small>SDK + CLI</small></span>
-          <span class="integration-ready"><b>NVIDIA CUDA</b><small>v1 proof vertical</small></span>
-          <span class="integration-planned"><b>MLflow</b><small>adapter planned</small></span>
-          <span class="integration-planned"><b>Weights &amp; Biases</b><small>adapter planned</small></span>
+          <span class="integration-ready"><b>PyTorch</b></span>
+          <span class="integration-ready"><b>Jupyter / Colab</b></span>
+          <span class="integration-ready"><b>NVIDIA CUDA</b></span>
+          <span class="integration-ready"><b>MLflow</b></span>
+          <span class="integration-ready"><b>Weights &amp; Biases</b></span>
         </div>
       </div>
     </section>
@@ -1521,8 +1521,8 @@
 <section class="section workflow-section" id="workflow">
   <div class="shell center-heading reveal">
     <div class="section-kicker">V1 PROOF VERTICAL · CUDA OOM RECOVERY</div>
-    <h2>Turn one CUDA OOM into an auditable recovery verdict.</h2>
-    <p>V1 implements one complete evidence-to-verdict path: capture the original failure, seal the allowed intervention and compute space, execute candidates in fresh processes, and require independent confirmation before claiming recovery.</p>
+    <h2>Turn one CUDA OOM into a controlled recovery experiment</h2>
+    <p>WatcherML is a local-first reliability layer for ML training. V1 starts with tackling OOM errors that can be captured, changed, rerun, and verified without guesswork.</p>
   </div>
 
   <div class="shell workflow-layout">
@@ -1764,8 +1764,8 @@
 
     <section class="section build-section" id="capabilities">
       <div class="shell center-heading reveal">
-        <div class="section-kicker">V1 SHIPS ONE PROVABLE VERTICAL</div>
-        <h2>A complete recovery protocol for CUDA OOMs.</h2>
+        <div class="section-kicker">BUILT IN PUBLIC</div>
+        <h2>A real MLOps system, tested on Nvidia GPUs.</h2>
       </div>
       <div class="shell build-stats reveal">
         <div><strong>Capture</strong><span>Versioned deterministic evidence</span></div>
@@ -1781,8 +1781,8 @@
         <div class="cta-orbit orbit-two" aria-hidden="true"></div>
         <div class="cta-content">
           <div class="eyebrow"><span class="pulse-dot"></span> Open-source · installable with pip</div>
-          <h2>Make your next OOM recovery inspectable.</h2>
-          <p>Install WatcherML locally, capture a real failure, and inspect every proposal, trial, constraint, and confirmation behind the result.</p>
+        <h2>Help build the experiment engineer your GPU deserves.</h2>
+          <p>Have new ideas and want to contribute? Open a new pull request on Github!</p>
           <div class="hero-actions centered">
             <a class="button button-light" href="#install">Install WatcherML</a>
             <a class="button button-transparent" href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">View source</a>
