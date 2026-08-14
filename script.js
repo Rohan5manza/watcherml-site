@@ -38,66 +38,6 @@ const revealObserver = new IntersectionObserver(
 
 document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 
-const workflowData = {
-  observe: {
-    number: '01',
-    title: 'Freeze the state around failure.',
-    description: 'Capture stack frames, tensor summaries, allocator state, recent metrics, Git changes, environment drift, and the last successful step.',
-    tags: ['CUDA state', 'tensor shapes', 'Git diff', 'stdout'],
-  },
-  hypothesize: {
-    number: '02',
-    title: 'Rank causes against real evidence.',
-    description: 'A local Ollama agent receives structured tools and evidence IDs, then returns ranked hypotheses instead of an ungrounded diagnosis.',
-    tags: ['structured output', 'evidence IDs', 'confidence', 'local LLM'],
-  },
-  intervene: {
-    number: '03',
-    title: 'Create the smallest safe experiment.',
-    description: 'The policy engine validates each proposed configuration or code patch, creates an isolated trial, and enforces hard resource limits.',
-    tags: ['worktree', 'container', 'allowlist', 'budget'],
-  },
-  evaluate: {
-    number: '04',
-    title: 'Let deterministic checks decide.',
-    description: 'Metrics, constraints, failure assertions, and performance tests determine whether the intervention succeeded—not the agent’s opinion.',
-    tags: ['objective', 'constraints', 'tests', 'verdict'],
-  },
-  remember: {
-    number: '05',
-    title: 'Turn outcomes into resolution memory.',
-    description: 'Store the signature, hypothesis, action, and measured result so future runs can begin with fixes that survived real experiments.',
-    tags: ['verified fix', 'resolution graph', 'history', 'reuse'],
-  },
-};
-
-const workflowTabs = document.querySelectorAll('[data-workflow-tab]');
-const stageId = document.querySelector('[data-stage-id]');
-const stageNumber = document.querySelector('[data-stage-number]');
-const stageTitle = document.querySelector('[data-stage-title]');
-const stageDescription = document.querySelector('[data-stage-description]');
-const stageTags = document.querySelector('[data-stage-tags]');
-
-workflowTabs.forEach((tab) => {
-  tab.addEventListener('click', () => {
-    const key = tab.dataset.workflowTab;
-    const item = workflowData[key];
-    if (!item) return;
-
-    workflowTabs.forEach((candidate) => {
-      const active = candidate === tab;
-      candidate.classList.toggle('active', active);
-      candidate.setAttribute('aria-selected', String(active));
-    });
-
-    stageId.textContent = key;
-    stageNumber.textContent = item.number;
-    stageTitle.textContent = item.title;
-    stageDescription.textContent = item.description;
-    stageTags.innerHTML = item.tags.map((tag) => `<span>${tag}</span>`).join('');
-  });
-});
-
 const codeTabs = document.querySelectorAll('[data-code-tab]');
 const codePanels = document.querySelectorAll('[data-code-panel]');
 const copyButton = document.querySelector('[data-copy-code]');
@@ -129,27 +69,27 @@ copyButton?.addEventListener('click', async () => {
 
 const agentStates = [
   {
-    score: '0.887',
+    score: '0.442',
     rows: [
-      ['Observed', 'CUDA OOM at step 417.'],
-      ['Captured', 'Allocator snapshot and tensor shapes.'],
-      ['Comparing', 'Searching nearest successful run.'],
+      ['Captured', 'CUDA OOM capsule v1.0.'],
+      ['Sealed', 'Contract and six-trial budget.'],
+      ['Planned', 'Automatic typed interventions.'],
     ],
   },
   {
-    score: '0.906',
+    score: '0.428',
     rows: [
-      ['Diagnosed', 'Activation memory growth likely.'],
-      ['Proposed', 'Lower batch + enable bf16.'],
-      ['Running', 'Probe trial 04 of 08.'],
+      ['Rejected', 'Unchanged batch still OOM.'],
+      ['Survived', 'Batch 16 reached probe limit.'],
+      ['Completed', 'Full trial within metric guard.'],
     ],
   },
   {
-    score: '0.928',
+    score: '0.421',
     rows: [
-      ['Verified', 'OOM signature resolved.'],
-      ['Measured', 'Throughput improved by 18%.'],
-      ['Completed', 'Campaign objective satisfied.'],
+      ['Confirmed', 'Independent run 1 passed.'],
+      ['Confirmed', 'Independent run 2 passed.'],
+      ['Verified', 'Recovery contract satisfied.'],
     ],
   },
 ];
