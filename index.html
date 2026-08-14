@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="WatcherML is a local deterministic experiment engineer for PyTorch. It investigates failed and underperforming runs, proposes evidence-backed interventions, executes bounded trials, and verifies what worked." />
+  <meta name="description" content="WatcherML is a local-first Python SDK and CLI for deterministic CUDA OOM forensics, bounded recovery campaigns, and independently verified recoveries." />
   <meta name="theme-color" content="#090b10" />
-  <meta property="og:title" content="WatcherML — Your first recovery and reliability layer for ML experiments" />
-  <meta property="og:description" content="A local-first forensic debugger and experiment engineer for PyTorch." />
+  <meta property="og:title" content="WatcherML — From CUDA OOM to verified recovery" />
+  <meta property="og:description" content="Capture deterministic OOM evidence, run bounded candidates in fresh processes, and verify recovery through independent confirmation." />
   <meta property="og:type" content="website" />
-  <title>WatcherML — Recovery and forensics layer for ML experiments</title>
+  <title>WatcherML — Deterministic CUDA OOM recovery</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
 
@@ -455,9 +455,9 @@
               <span class="pulse-dot"></span>
               Open-source · Local-first
             </div>
-            <h1>From failed run to <span class="gradient-text">verified fix</span></h1>
+            <h1>From CUDA OOM to <span class="gradient-text">verified recovery</span></h1>
             <p class="hero-lede">
-              WatcherML is the reliability and recovery layer for ML training. It captures evidence, diagnoses failures, proposes bounded interventions, reruns controlled trials, and proves which change actually worked.
+              WatcherML is a local-first Python SDK and CLI that captures deterministic OOM evidence, seals allowed changes and compute budgets, runs controlled candidates in fresh subprocesses, and verifies recovery only after independent confirmation.
             </p>
 
             <div class="hero-actions">
@@ -468,18 +468,18 @@
               </a>
             </div>
             <div class="hero-proof">
-              <div><strong>Deterministic-first</strong><span>Diagnosis works without an LLM</span></div>
-              <div><strong>LLM optional</strong><span>Local or cloud via any-llm(coming soon in V2 launch)</span></div>
-              <div><strong>Plays well with others</strong><span>Standalone or export to MLflow / W&B</span></div>
+              <div><strong>Deterministic capsule</strong><span>Versioned failure evidence, no LLM required</span></div>
+              <div><strong>Bounded execution</strong><span>Hard trial, timeout, and GPU budgets</span></div>
+              <div><strong>Verifier-owned truth</strong><span>Full trials plus independent confirmations</span></div>
             </div>
           </div>
 
-          <div class="hero-visual reveal" aria-label="WatcherML autonomous experiment dashboard preview">
+          <div class="hero-visual reveal" aria-label="WatcherML deterministic OOM recovery campaign preview">
             <div class="visual-glow" aria-hidden="true"></div>
             <div class="window-card">
               <div class="window-topbar">
                 <div class="window-dots"><span></span><span></span><span></span></div>
-                <div class="window-title">campaign / llama-lora-recovery</div>
+                <div class="window-title">campaign / llama-lora-oom</div>
                 <div class="status-chip"><span></span> recovery active</div>
               </div>
 
@@ -498,36 +498,36 @@
                   <div class="campaign-head">
                     <div>
                       <div class="mock-kicker">CAMPAIGN</div>
-                      <h2>Recover & optimize</h2>
+                      <h2>Recover & verify</h2>
                     </div>
                     <div class="campaign-score">
-                      <span>objective</span>
-                      <strong data-objective-score>0.928</strong>
+                      <span>validation loss</span>
+                      <strong data-objective-score>0.421</strong>
                     </div>
                   </div>
 
                   <div class="metric-strip">
-                    <div><span>Best trial</span><strong>#05</strong></div>
-                    <div><span>Peak VRAM</span><strong>13.9 GB</strong></div>
-                    <div><span>GPU budget</span><strong>2h 46m</strong></div>
-                    <div><span>Status</span><strong class="success-text">Recovered</strong></div>
+                    <div><span>Source</span><strong>CUDA OOM</strong></div>
+                    <div><span>Trials</span><strong>4 / 6</strong></div>
+                    <div><span>Confirmations</span><strong>2 required</strong></div>
+                    <div><span>Status</span><strong class="success-text">Verified</strong></div>
                   </div>
 
                   <div class="mock-grid">
                     <div class="panel agent-panel">
                       <div class="panel-head">
-                        <span>Recovery reasoning</span>
-                        <span class="live-badge">LIVE</span>
+                        <span>Campaign evidence</span>
+                        <span class="live-badge">RECORDED</span>
                       </div>
                       <div class="agent-log" data-agent-log aria-live="polite">
-                        <div class="log-row"><span class="log-time">01</span><p><b>Observed</b> CUDA OOM at step 417.</p></div>
-                        <div class="log-row"><span class="log-time">02</span><p><b>Compared</b> with nearest successful run.</p></div>
-                        <div class="log-row active"><span class="log-time">03</span><p><b>Testing</b> bf16 + gradient checkpointing.</p></div>
+                        <div class="log-row"><span class="log-time">01</span><p><b>Sealed</b> source capsule and contract.</p></div>
+                        <div class="log-row"><span class="log-time">02</span><p><b>Probed</b> batch 16 in a fresh process.</p></div>
+                        <div class="log-row active"><span class="log-time">03</span><p><b>Confirmed</b> the candidate twice.</p></div>
                       </div>
                     </div>
 
                     <div class="panel chart-panel">
-                      <div class="panel-head"><span>Trial objective</span><span>↑ 4.1%</span></div>
+                      <div class="panel-head"><span>Validation loss</span><span>within +0.030</span></div>
                       <div class="chart-wrap" aria-hidden="true">
                         <svg viewBox="0 0 360 180" preserveAspectRatio="none">
                           <defs>
@@ -541,23 +541,23 @@
                           <path class="plot-line" d="M0 145 C38 138 55 149 86 126 S132 104 162 108 S205 78 236 89 S284 56 316 66 S341 43 360 38" />
                           <circle cx="360" cy="38" r="5" class="plot-dot" />
                         </svg>
-                        <div class="chart-labels"><span>baseline</span><span>trial 5</span></div>
+                        <div class="chart-labels"><span>baseline</span><span>confirmation 2</span></div>
                       </div>
                     </div>
                   </div>
 
                   <div class="trial-table">
-                    <div class="trial-row header"><span>Trial</span><span>Intervention</span><span>Result</span><span>Decision</span></div>
-                    <div class="trial-row"><span>#03</span><span>batch 4 → 2</span><span>OOM resolved</span><span class="pill neutral">keep</span></div>
-                    <div class="trial-row"><span>#04</span><span>bf16 enabled</span><span>+18% throughput</span><span class="pill good">accept</span></div>
-                    <div class="trial-row highlighted"><span>#05</span><span>lr 3e-4 → 1.8e-4</span><span>F1 0.928</span><span class="pill good">best</span></div>
+                    <div class="trial-row header"><span>Phase</span><span>Intervention</span><span>Result</span><span>Evidence</span></div>
+                    <div class="trial-row"><span>probe</span><span>batch 32 → 16</span><span>30 steps</span><span class="pill neutral">survived</span></div>
+                    <div class="trial-row"><span>full</span><span>batch 16 + accum 2</span><span>completed</span><span class="pill neutral">provisional</span></div>
+                    <div class="trial-row highlighted"><span>confirm</span><span>same sealed config</span><span>2 / 2 passed</span><span class="pill good">verified</span></div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="floating-card floating-left">
               <span class="float-icon">↳</span>
-              <div><strong>Verified fix</strong><small>OOM signature resolved</small></div>
+              <div><strong>Verified recovery</strong><small>2 confirmations passed</small></div>
             </div>
           </div>
         </div>
@@ -565,7 +565,7 @@
         <div class="hero-launcher-shell reveal">
           <div class="hero-launcher" id="install" data-launcher aria-label="Install and use WatcherML">
             <div class="launcher-head">
-              <div class="launcher-badge"><span class="launcher-badge-dot"></span>Official PyPI install</div>
+              <div class="launcher-badge"><span class="launcher-badge-dot"></span>Python SDK + CLI</div>
               <div class="launcher-controls">
                 <span class="launcher-counter" data-launcher-counter>01 / 04</span>
                 <button class="launcher-arrow" type="button" data-launcher-prev aria-label="Previous example">←</button>
@@ -765,22 +765,24 @@
                     <pre><code><span class="comment"># Inspect the captured OOM</span>
 <span class="cmd">watcher</span> inspect RUN_ID
 
-<span class="comment"># Start isolated controlled trials</span>
-<span class="cmd">watcher</span> recover RUN_ID \
-  --entrypoint train_trial:run \
-  --max-trials 6 \
-  --confirmation-runs 2
+<span class="comment"># Seal constraints before compute</span>
+<span class="cmd">watcher</span> prepare-recovery RUN_ID \
+  --entrypoint train:train \
+  --metric validation_loss:minimize:0.42:0.03 \
+  --minimum-progress-steps 1000 \
+  --confirmation-runs 2 \
+  --out recovery-plan.json
+
+<span class="comment"># Review, then run bounded trials</span>
+<span class="cmd">watcher</span> recover --plan recovery-plan.json
 
 <span class="comment"># Inspect the complete campaign</span>
-<span class="cmd">watcher</span> recovery CAMPAIGN_ID
-
-<span class="comment"># Export the original evidence</span>
-<span class="cmd">watcher</span> export RUN_ID</code></pre>
+<span class="cmd">watcher</span> recovery CAMPAIGN_ID</code></pre>
 
                     <button
                       class="launcher-copy"
                       type="button"
-                      data-copy-text="watcher inspect RUN_ID&#10;&#10;watcher recover RUN_ID \&#10;  --entrypoint train_trial:run \&#10;  --max-trials 6 \&#10;  --confirmation-runs 2&#10;&#10;watcher recovery CAMPAIGN_ID&#10;watcher export RUN_ID"
+                      data-copy-text="watcher inspect RUN_ID&#10;&#10;watcher prepare-recovery RUN_ID \&#10;  --entrypoint train:train \&#10;  --metric validation_loss:minimize:0.42:0.03 \&#10;  --minimum-progress-steps 1000 \&#10;  --confirmation-runs 2 \&#10;  --out recovery-plan.json&#10;&#10;watcher recover --plan recovery-plan.json&#10;&#10;watcher recovery CAMPAIGN_ID"
                     >
                       Copy
                     </button>
@@ -834,8 +836,6 @@
       </div>
     </section>
 
-        </section>
-
    <section
   class="oom-stories"
   id="oom-stories"
@@ -853,8 +853,8 @@
       </div>
 
       <p>
-       CUDA Out of Memory (OOM) errors are arguably the most common bottleneck in AI dev.
-       They can erase hours, or even days, of GPU training.
+        CUDA out-of-memory errors are a recurring failure mode in GPU training.
+        The exception is brief; the lost compute and uncertain recovery are not.
       </p>
     </div>
 
@@ -1055,10 +1055,10 @@
       <span class="oom-answer-mark">W</span>
 
       <p>
-        <strong>WatcherML turns the crash into a controlled investigation.</strong>
-        It captures a versioned failure capsule, evaluates bounded
-        configuration interventions in fresh processes, and records whether
-        recovery passed its declared verification contract.
+        <strong>WatcherML turns the crash into a bounded recovery protocol.</strong>
+        It captures a versioned failure capsule, seals constraints before
+        compute, evaluates typed interventions in fresh processes, and lets
+        independent confirmation—not a promising trial—decide recovery.
       </p>
 
       <a href="#workflow">
@@ -1076,16 +1076,16 @@
   <div class="shell">
     <div class="recovery-value-heading reveal">
       <div>
-        <div class="section-kicker">MASSIVELY IMPROVE YOUR ML WORKFLOWS</div>
+        <div class="section-kicker">WHY THE PROTOCOL MATTERS</div>
         <h2 id="recovery-value-title">
-          Stop paying full price.<br />
-          <em>Save your GPU-hours.</em>
+          Spend GPU-hours on evidence.<br />
+          <em>Not configuration roulette.</em>
         </h2>
       </div>
 
       <p>
-        WatcherML assists ML engineers when training is expensive, failures recur, multiple
-        engineers are involved, and successful retries must be trusted later.
+        WatcherML is most useful when training is expensive, failures recur, multiple
+        engineers are involved, or a successful retry must be trusted later.
       </p>
     </div>
 
@@ -1140,9 +1140,9 @@
               </h3>
 
               <p>
-                Manual recovery can make one run complete. It rarely produces a
-                complete explanation of the incident or evidence that another
-                engineer can inspect and reproduce.
+                Manual recovery can make one run complete. It rarely leaves a
+                sealed record of what failed, what changed, and whether repeated
+                runs satisfied constraints declared before execution.
               </p>
 
               <div class="cause-cloud" aria-label="Possible CUDA OOM causes">
@@ -1360,7 +1360,7 @@
 
               <p>
                 Integration is paid once. Every incident then contributes
-                reusable evidence, contracts, adapters, policies, and comparable
+                reusable evidence, contracts, entrypoints, policies, and comparable
                 intervention outcomes.
               </p>
             </div>
@@ -1392,8 +1392,8 @@
                 </div>
 
                 <div>
-                  <strong>Framework adapters</strong>
-                  <span>Lower setup cost</span>
+                  <strong>Training entrypoints</strong>
+                  <span>Reusable workload contract</span>
                 </div>
 
                 <div>
@@ -1447,7 +1447,7 @@
 
               <div>
                 <span>02</span>
-                <p><b>Diagnose</b><small>Evidence-backed interventions</small></p>
+                <p><b>Plan</b><small>Evidence-backed interventions</small></p>
                 <em>No additional GPU run</em>
               </div>
 
@@ -1496,63 +1496,33 @@
     <blockquote class="value-positioning reveal">
       <span>THE BOTTOM LINE</span>
       <p>
-        Manual retries can make a run pass.
+        Manual retries can make one run pass.
         <strong>
-          WatcherML finds what failed, proposes recovery steps, and executes verified trials.
+          WatcherML preserves the failure, bounds the search, and verifies that the recovery repeats.
         </strong>
       </p>
     </blockquote>
   </div>
 </section>
 
-    <section class="integration-band" aria-label="Technology integrations">
+    <section class="integration-band" aria-label="WatcherML ecosystem status">
       <div class="shell">
-        <p>Designed to work with the stack you already use</p>
+        <p>Built for the stack you already use</p>
         <div class="logo-row">
-          <span>PyTorch</span><span>Jupyter</span><span>NVIDIA</span><span>MLflow</span><span>Weights & Biases</span>
+          <span class="integration-ready"><b>PyTorch</b><small>v1 workload</small></span>
+          <span class="integration-ready"><b>Jupyter / Colab</b><small>SDK + CLI</small></span>
+          <span class="integration-ready"><b>NVIDIA CUDA</b><small>v1 proof vertical</small></span>
+          <span class="integration-planned"><b>MLflow</b><small>adapter planned</small></span>
+          <span class="integration-planned"><b>Weights &amp; Biases</b><small>adapter planned</small></span>
         </div>
       </div>
     </section>
-
-    <section class="section problem-section">
-      <div class="shell split-heading reveal">
-        <div>
-          <div class="section-kicker">THE MISSING LAYER</div>
-          <h2>Trackers show you <em>what</em> happened.<br />WatcherML investigates <em>why.</em></h2>
-        </div>
-        <p>
-          Metrics dashboards are useful after a clean run. WatcherML is built for the messy reality: CUDA OOMs, NaNs, stalled data loaders, poor GPU utilization, regressions, and experiments that need more than another chart.
-        </p>
-      </div>
-      <div class="shell comparison-grid">
-        <article class="comparison-card muted reveal">
-          <div class="card-label">Traditional tracker</div>
-          <h3>“Run failed at step 417.”</h3>
-          <div class="tracker-screen">
-            <div class="tracker-row"><span>status</span><b class="error-text">failed</b></div>
-            <div class="tracker-row"><span>exception</span><b>CUDA out of memory</b></div>
-            <div class="tracker-row"><span>peak VRAM</span><b>15.88 GB</b></div>
-            <div class="tracker-row"><span>loss</span><b>—</b></div>
-          </div>
-        </article>
-        <article class="comparison-card bright reveal">
-          <div class="card-label">WatcherML forensic report</div>
-          <h3>“Here is the cause, evidence, and verified recovery.”</h3>
-          <div class="forensic-list">
-            <div><span class="number">01</span><p><b>Cause ranked</b><br />Sequence length increased 33%; activation memory exceeded available VRAM.</p></div>
-            <div><span class="number">02</span><p><b>Baseline selected</b><br />Nearest successful run matched model, dataset, hardware, and Git ancestry.</p></div>
-            <div><span class="number">03</span><p><b>Fix verified</b><br />Trial completed with 1.9 GB headroom and improved throughput.</p></div>
-          </div>
-        </article>
-      </div>
-    </section>
-
 
 <section class="section workflow-section" id="workflow">
   <div class="shell center-heading reveal">
     <div class="section-kicker">V1 PROOF VERTICAL · CUDA OOM RECOVERY</div>
-    <h2>Turn one CUDA OOM into a controlled recovery experiment.</h2>
-    <p>WatcherML is a local-first reliability layer for ML training. V1 starts with tackling OOM errors that can be captured, changed, rerun, and verified without guesswork.</p>
+    <h2>Turn one CUDA OOM into an auditable recovery verdict.</h2>
+    <p>V1 implements one complete evidence-to-verdict path: capture the original failure, seal the allowed intervention and compute space, execute candidates in fresh processes, and require independent confirmation before claiming recovery.</p>
   </div>
 
   <div class="shell workflow-layout">
@@ -1564,7 +1534,7 @@
         <span>02</span><div><b>Classify</b><small>Apply a deterministic rule</small></div>
       </button>
       <button id="workflow-tab-propose" class="workflow-tab" type="button" role="tab" aria-selected="false" aria-controls="workflow-stage" data-workflow-tab="propose">
-        <span>03</span><div><b>Propose</b><small>Choose one bounded change</small></div>
+        <span>03</span><div><b>Plan</b><small>Seal typed interventions and budgets</small></div>
       </button>
       <button id="workflow-tab-trial" class="workflow-tab" type="button" role="tab" aria-selected="false" aria-controls="workflow-stage" data-workflow-tab="trial">
         <span>04</span><div><b>Trial</b><small>Run in a fresh process</small></div>
@@ -1604,9 +1574,9 @@
   <div class="shell code-layout">
     <div class="code-copy reveal">
       <div class="section-kicker">LOCAL-FIRST SDK + CLI</div>
-      <h2>One context manager for scripts, Jupyter, and Google Colab.</h2>
-      <p>The core recorder and CLI work without the web UI. In Colab, inspect and export from Python or shell commands; install the optional UI only on a machine where a local browser server makes sense.</p>
-      <div class="install-note"><span>Available through pip</span><small>No hosted service, Ollama process, or LLM dependency is required.</small></div>
+      <h2>Capture locally. Recover through Python or the CLI.</h2>
+      <p>The recorder works in scripts, Jupyter, and Google Colab. Recovery uses an importable training entrypoint so every probe, full trial, and confirmation can start in a fresh supervised process.</p>
+      <div class="install-note"><span>Available through pip</span><small>No hosted service, web UI, LLM, or container runtime is required.</small></div>
     </div>
     <div class="code-window reveal">
       <div class="code-tabs" role="tablist" aria-label="WatcherML SDK and CLI examples">
@@ -1622,7 +1592,7 @@
 ) <span class="token-key">as</span> run:
     <span class="token-key">for</span> step, batch <span class="token-key">in</span> enumerate(loader):
         loss = train_step(model, batch)
-        run.log({<span class="token-string">"loss"</span>: loss}, step=step)
+        run.log_metric(<span class="token-string">"loss"</span>, float(loss), step=step)
 
 <span class="token-comment"># On failure, the original exception still propagates.</span>
 <span class="token-comment"># WatcherML has already persisted the deterministic capsule.</span></code></pre>
@@ -1648,10 +1618,10 @@
     <div class="safety-copy reveal">
       <div class="section-kicker">CONTROLLED BY CONSTRUCTION</div>
       <h2>A recovery trial is evidence, not a guess.</h2>
-      <p>WatcherML v1 cannot rewrite training code, install dependencies, alter datasets, or silently keep searching. It applies an allowed configuration patch in a fresh process and records exactly what happened.</p>
+      <p>WatcherML v1 cannot rewrite training code, install dependencies, alter datasets, or silently keep searching. It materializes a typed, contract-approved intervention in a fresh process and records exactly what happened.</p>
       <a class="inline-arrow" href="#recovery-contract">See the recovery contract <span>→</span></a>
     </div>
-    <div class="guardrail-grid reveal">
+    <div class="guardrail-grid reveal" id="recovery-contract">
       <div><span>01</span><b>Fresh processes</b><small>Each trial receives a clean interpreter and an independent evidence record.</small></div>
       <div><span>02</span><b>Source run preserved</b><small>The failed run and its capsule are immutable campaign inputs.</small></div>
       <div><span>03</span><b>Allowlisted patches</b><small>V1 changes declared configuration keys—not code, packages, or data.</small></div>
@@ -1698,10 +1668,10 @@
       description: "Use captured batch, accumulation, checkpointing, progress, and memory evidence to select one reversible configuration patch. Record why it was chosen before spending compute.",
       tags: ["one change", "config only", "reversible", "auditable rationale"],
       code: [
-        'proposal.key = "batch_size"',
+        'proposal.type = "batch_size"',
         "proposal.before = 32",
         "proposal.after = 16",
-        'proposal.expected_effect = "lower activation memory"'
+        "contract.max_trials = 6"
       ]
     },
     trial: {
@@ -1792,16 +1762,16 @@
 })();
 </script>
 
-    <section class="section build-section">
+    <section class="section build-section" id="capabilities">
       <div class="shell center-heading reveal">
-        <div class="section-kicker">BUILT IN PUBLIC</div>
-        <h2>A real MLOps system, tested on Nvidia GPUs.</h2>
+        <div class="section-kicker">V1 SHIPS ONE PROVABLE VERTICAL</div>
+        <h2>A complete recovery protocol for CUDA OOMs.</h2>
       </div>
       <div class="shell build-stats reveal">
-        <div><strong>Open</strong><span>Python package</span></div>
-        <div><strong>Local</strong><span>Deterministic Recovery</span></div>
-        <div><strong>Auditable</strong><span>Every intervention recorded</span></div>
-        <div><strong>Verified</strong><span>Fixes proven through controlled reruns</span></div>
+        <div><strong>Capture</strong><span>Versioned deterministic evidence</span></div>
+        <div><strong>Bound</strong><span>Trial, timeout, and GPU budgets</span></div>
+        <div><strong>Isolate</strong><span>Fresh subprocess per attempt</span></div>
+        <div><strong>Verify</strong><span>Independent confirmation owns the verdict</span></div>
       </div>
     </section>
 
@@ -1811,11 +1781,11 @@
         <div class="cta-orbit orbit-two" aria-hidden="true"></div>
         <div class="cta-content">
           <div class="eyebrow"><span class="pulse-dot"></span> Open-source · installable with pip</div>
-          <h2>Help build the experiment engineer your GPU deserves.</h2>
-          <p>Have new ideas and want to contribute? Open a new pull request on Github!</p>
+          <h2>Make your next OOM recovery inspectable.</h2>
+          <p>Install WatcherML locally, capture a real failure, and inspect every proposal, trial, constraint, and confirmation behind the result.</p>
           <div class="hero-actions centered">
-            <a class="button button-light" href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">Follow on GitHub</a>
-            <a class="button button-transparent" href="https://github.com/Rohan5manza" target="_blank" rel="noreferrer">Meet the builder</a>
+            <a class="button button-light" href="#install">Install WatcherML</a>
+            <a class="button button-transparent" href="https://github.com/Rohan5manza/watcherml" target="_blank" rel="noreferrer">View source</a>
           </div>
         </div>
       </div>
